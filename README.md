@@ -1,0 +1,1 @@
+# owl2json-schema
