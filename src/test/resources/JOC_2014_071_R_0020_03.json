@@ -1,0 +1,58 @@
+{
+  "@id" : "http://publications.europa.eu/resource/oj/JOC_2014_071_R_0020_03",
+  "@type" : [ "http://publications.europa.eu/ontology/cdm#work", "http://publications.europa.eu/ontology/cdm#publication_general" ],
+  "http://publications.europa.eu/ontology/cdm#date_creation_legacy" : {
+    "@type" : "http://www.w3.org/2001/XMLSchema#date",
+    "@value" : "2018-03-08"
+  },
+  "http://publications.europa.eu/ontology/cdm#publication_general_has_target_audience" : {
+    "@id" : "http://publications.europa.eu/resource/authority/target-audience/SPE"
+  },
+  "http://publications.europa.eu/ontology/cdm#publication_general_is_about_concept_op_theme" : [ {
+    "@id" : "http://publications.europa.eu/resource/authority/pub-theme/A02"
+  }, {
+    "@id" : "http://publications.europa.eu/resource/authority/pub-theme/E05"
+  } ],
+  "http://publications.europa.eu/ontology/cdm#work_authored_by_agent" : {
+    "@id" : "http://publications.europa.eu/resource/authority/corporate-body/EIB"
+  },
+  "http://publications.europa.eu/ontology/cdm#work_date_creation_legacy" : {
+    "@type" : "http://www.w3.org/2001/XMLSchema#date",
+    "@value" : "2018-03-08"
+  },
+  "http://publications.europa.eu/ontology/cdm#work_date_document" : {
+    "@type" : "http://www.w3.org/2001/XMLSchema#date",
+    "@value" : "2006-04-20"
+  },
+  "http://publications.europa.eu/ontology/cdm#work_has_resource-type" : {
+    "@id" : "http://publications.europa.eu/resource/authority/resource-type/PUB_GEN"
+  },
+  "http://publications.europa.eu/ontology/cdm#work_id_document" : {
+    "@type" : "http://www.w3.org/2001/XMLSchema#string",
+    "@value" : "2006.0101a"
+  },
+  "http://publications.europa.eu/ontology/cdm#work_is_about_concept_eurovoc" : [ {
+    "@id" : "http://eurovoc.europa.eu/1005"
+  }, {
+    "@id" : "http://eurovoc.europa.eu/2607"
+  }, {
+    "@id" : "http://eurovoc.europa.eu/4139"
+  }, {
+    "@id" : "http://eurovoc.europa.eu/4838"
+  }, {
+    "@id" : "http://eurovoc.europa.eu/5418"
+  } ],
+  "http://publications.europa.eu/ontology/cdm/cmr#creationDate" : {
+    "@type" : "http://www.w3.org/2001/XMLSchema#dateTime",
+    "@value" : "2018-03-08T04:08:15.151Z"
+  },
+  "http://publications.europa.eu/ontology/cdm/cmr#lastModificationDate" : {
+    "@type" : "http://www.w3.org/2001/XMLSchema#dateTime",
+    "@value" : "2018-03-09T03:45:20.422Z"
+  },
+  "http://www.w3.org/2002/07/owl#sameAs" : [ {
+    "@id" : "http://publications.europa.eu/resource/cellar/660585c3-6670-40eb-9498-7e4927df0d69"
+  }, {
+    "@id" : "http://publications.europa.eu/resource/genpub/2006.0101a"
+  } ]
+}

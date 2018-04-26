@@ -1,0 +1,649 @@
+<?xml version="1.0"?><!-- -*- mode: nxml; coding: utf-8; -*- -->
+<!DOCTYPE rdf:RDF [
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+    <!ENTITY import "http://publications.europa.eu/resource/cdm/import#" >
+    <!ENTITY OP "http://publications.europa.eu/ontology/cdm#">
+]>
+
+<rdf:RDF xmlns="http://publications.europa.eu/resource/cdm/import#"
+     xml:base="http://publications.europa.eu/resource/cdm/import#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#" 
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:annotation="http://publications.europa.eu/ontology/annotation#">
+
+  <owl:Ontology rdf:about="http://publications.europa.eu/ontology/cdm/import">
+    <owl:imports rdf:resource="http://publications.europa.eu/ontology/annotation"/>
+    <owl:imports rdf:resource="http://publications.europa.eu/ontology/cdm/derived_class"/>
+    <owl:imports rdf:resource="http://publications.europa.eu/ontology/datatype"/>
+    <owl:imports rdf:resource="http://publications.europa.eu/ontology/cdm/indexation"/>
+    <owl:imports rdf:resource="http://www.w3.org/2004/02/skos/core"/>
+    <owl:imports rdf:resource="http://www.w3.org/2008/05/skos-xl"/>
+	<owl:imports rdf:resource="http://publications.europa.eu/ontology/euvoc"/>
+    <owl:versionInfo rdf:datatype="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Version 4.1.8Id: import.rdf 28691 2017-03-24 10:58:38Z kustema $</owl:versionInfo>
+  </owl:Ontology>
+
+  <rdf:Description>
+    <rdf:type rdf:resource="&owl;AllDisjointClasses"/>
+    <owl:members rdf:parseType="Collection">
+      <rdf:Description rdf:about="&OP;item"/>
+      <rdf:Description rdf:about="&OP;expression"/>
+      <rdf:Description rdf:about="&OP;manifestation"/>
+      <rdf:Description rdf:about="&OP;entity_temporal"/>
+      <rdf:Description rdf:about="&OP;work"/>
+      <rdf:Description rdf:about="&OP;concept"/>
+    </owl:members>
+  </rdf:Description>
+
+
+  <rdf:Description>
+    <rdf:type rdf:resource="&owl;AllDisjointClasses"/>
+    <owl:members rdf:parseType="Collection">
+      <rdf:Description rdf:about="&OP;concept_case-law"/>
+      <rdf:Description rdf:about="&OP;concept_new_case-law"/>
+      <rdf:Description rdf:about="&OP;concept_directory-code"/>
+      <rdf:Description rdf:about="&OP;concept_eurovoc"/>
+      <rdf:Description rdf:about="&OP;subject-matter"/>
+      <rdf:Description rdf:about="&OP;concept_prelex_council"/>
+    </owl:members>
+  </rdf:Description>
+
+  <rdf:Description>
+    <rdf:type rdf:resource="&owl;AllDisjointClasses"/>
+    <owl:members rdf:parseType="Collection">
+      <rdf:Description rdf:about="&OP;event"/>
+      <rdf:Description rdf:about="&OP;dossier"/>
+    </owl:members>
+  </rdf:Description>
+
+  <rdf:Description>
+    <rdf:type rdf:resource="&owl;AllDisjointClasses"/>
+    <owl:members rdf:parseType="Collection">
+      <rdf:Description rdf:about="&OP;procedure_without_code_interinstitutional"/>
+      <rdf:Description rdf:about="&OP;procedure_code_interinstitutional"/>
+    </owl:members>
+  </rdf:Description>
+  
+  <rdf:Description>
+    <rdf:type rdf:resource="&owl;AllDisjointClasses"/>
+    <owl:members rdf:parseType="Collection">
+      <rdf:Description rdf:about="&OP;document_efta"/>
+      <rdf:Description rdf:about="&OP;case-law"/>
+    </owl:members>
+  </rdf:Description>
+
+
+  <owl:ObjectProperty rdf:about="&OP;related_to">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"></rdf:type>
+  </owl:ObjectProperty>
+
+  <!-- Classes of identifiers -->
+  <owl:DatatypeProperty rdf:about="&OP;identifier">
+    <rdfs:label>Any type of identifier</rdfs:label>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="&OP;id">
+    <rdfs:subPropertyOf rdf:resource="&OP;identifier"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="&OP;id_celex">
+    <rdfs:subPropertyOf rdf:resource="&OP;identifier"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="&OP;eli">
+    <rdfs:subPropertyOf rdf:resource="&OP;identifier"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="&OP;id_com">
+    <rdfs:subPropertyOf rdf:resource="&OP;identifier"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="&OP;id_document">
+    <rdfs:subPropertyOf rdf:resource="&OP;identifier"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="&OP;id_fragment">
+    <rdfs:subPropertyOf rdf:resource="&OP;identifier"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="&OP;id_obsolete_document">
+    <rdfs:subPropertyOf rdf:resource="&OP;identifier"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="&OP;id_obsolete_notice">
+    <rdfs:subPropertyOf rdf:resource="&OP;identifier"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="&OP;id_object_ccr">
+    <rdfs:subPropertyOf rdf:resource="&OP;identifier"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="&OP;data-name">
+    <rdfs:subPropertyOf rdf:resource="&OP;identifier"/>
+  </owl:DatatypeProperty>
+
+  <!-- Titles -->
+  <owl:DatatypeProperty rdf:about="&OP;title">
+    <rdfs:label>Any type of title</rdfs:label>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="&OP;subtitle">
+    <rdfs:subPropertyOf rdf:resource="&OP;title"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="&OP;title_alternative">
+    <rdfs:subPropertyOf rdf:resource="&OP;title"/>
+  </owl:DatatypeProperty>
+
+
+  <owl:DatatypeProperty rdf:about="&OP;title_information_additional">
+    <rdfs:subPropertyOf rdf:resource="&OP;title"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="&OP;title_part">
+    <rdfs:subPropertyOf rdf:resource="&OP;title"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="&OP;name_meeting">
+    <rdfs:subPropertyOf rdf:resource="&OP;title"/>
+  </owl:DatatypeProperty>
+
+  <!-- Dates -->
+  <owl:DatatypeProperty rdf:about="&OP;date">
+    <rdfs:label>Any type of date</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="&OP;date_deadline">
+    <rdfs:subPropertyOf rdf:resource="&OP;date"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="&OP;date_debate">
+    <rdfs:subPropertyOf rdf:resource="&OP;date"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="&OP;date_dispatch">
+    <rdfs:subPropertyOf rdf:resource="&OP;date"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="&OP;date_document">
+    <rdfs:subPropertyOf rdf:resource="&OP;date"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="&OP;date_notification">
+    <rdfs:subPropertyOf rdf:resource="&OP;date"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="&OP;date_processing">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <rdfs:subPropertyOf rdf:resource="&OP;date"/>
+  </owl:DatatypeProperty>
+
+ <!-- <owl:DatatypeProperty rdf:about="&OP;date_publication">
+    <rdfs:subPropertyOf rdf:resource="&OP;date"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+  </owl:DatatypeProperty> -->
+
+  <owl:DatatypeProperty rdf:about="&OP;date_reply">
+    <rdfs:subPropertyOf rdf:resource="&OP;date"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="&OP;date_request_caducity">
+    <rdfs:subPropertyOf rdf:resource="&OP;date"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="&OP;date_request_opinion">
+    <rdfs:subPropertyOf rdf:resource="&OP;date"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="&OP;date_end-of-validity">
+    <rdfs:subPropertyOf rdf:resource="&OP;date"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="&OP;date_entry-into-force">
+    <rdfs:subPropertyOf rdf:resource="&OP;date"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="&OP;date_signature">
+    <rdfs:subPropertyOf rdf:resource="&OP;date"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="&OP;date_transposition">
+    <rdfs:subPropertyOf rdf:resource="&OP;date"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="&OP;date_vote">
+    <rdfs:subPropertyOf rdf:resource="&OP;date"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="&OP;date_creation_legacy">
+    <rdfs:subPropertyOf rdf:resource="&OP;date"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="&OP;date_deletion">
+    <rdfs:subPropertyOf rdf:resource="&OP;date"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="&OP;date_request">
+    <rdfs:subPropertyOf rdf:resource="&OP;date"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+  </owl:DatatypeProperty>
+
+  <!-- number_natural -->
+  <!--owl:DatatypeProperty rdf:about="&OP;number_natural_celex">
+    <rdfs:subPropertyOf rdf:resource="&OP;number_natural"/>
+  </owl:DatatypeProperty-->
+
+
+  <!-- Types -->
+  <owl:DatatypeProperty rdf:about="&OP;type">
+    <rdfs:label>Any type of type</rdfs:label>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="&OP;type_act">
+    <rdfs:subPropertyOf rdf:resource="&OP;type"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="&OP;type_decision">
+    <rdfs:subPropertyOf rdf:resource="&OP;type"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="&OP;type_dossier">
+    <rdfs:subPropertyOf rdf:resource="&OP;type"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="&OP;type_procedure">
+    <rdfs:subPropertyOf rdf:resource="&OP;type"/>
+  </owl:DatatypeProperty>
+
+  <!-- Do not index -->
+  <owl:DatatypeProperty rdf:about="&OP;do_not_index">
+    <rdfs:label>do not index</rdfs:label>
+    <rdfs:comment>Do not index any object marked with this property, if the value is false. By default, treat the value as true</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  </owl:DatatypeProperty>
+
+  <!-- involves -->
+  <owl:ObjectProperty rdf:about="&OP;dossier_responsibility_of_agent">
+    <rdfs:subPropertyOf rdf:resource="&OP;dossier_involves_agent"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="&OP;dossier_consults_agent">
+    <rdfs:subPropertyOf rdf:resource="&OP;dossier_involves_agent"/>
+  </owl:ObjectProperty>
+
+
+  <!-- uses / used_by -->
+  <owl:ObjectProperty rdf:about="&OP;uses">
+    <rdfs:label>An entity uses another one</rdfs:label>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="&OP;uses_originally">
+    <rdfs:subPropertyOf rdf:resource="&OP;uses"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="&OP;table_of_contents_uses">
+    <rdfs:subPropertyOf rdf:resource="&OP;uses"/>
+  </owl:ObjectProperty>
+  
+  <owl:ObjectProperty rdf:about="&OP;accompanying_material_uses">
+    <rdfs:subPropertyOf rdf:resource="&OP;uses"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="&OP;original_translation_uses">
+    <rdfs:subPropertyOf rdf:resource="&OP;uses"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="&OP;used_by">
+    <rdfs:label>An entity is used by another one</rdfs:label>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="&OP;used_originally_by">
+    <rdfs:subPropertyOf rdf:resource="&OP;used_by"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="&OP;used_by_table_of_contents">
+    <rdfs:subPropertyOf rdf:resource="&OP;used_by"/>
+  </owl:ObjectProperty>
+  
+  <owl:ObjectProperty rdf:about="&OP;used_by_accompanying_material">
+    <rdfs:subPropertyOf rdf:resource="&OP;used_by"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="&OP;used_by_original_translation">
+    <rdfs:subPropertyOf rdf:resource="&OP;used_by"/>
+  </owl:ObjectProperty>
+
+  <!-- subdivisions -->
+  <owl:ObjectProperty rdf:about="&OP;subdivision_contains_subdivision">
+    <rdfs:subPropertyOf rdf:resource="&OP;work_contains_work"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="&OP;subdivision_part_of_subdivision">
+    <rdfs:subPropertyOf rdf:resource="&OP;work_part_of_work"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="http://publications.europa.eu/ontology/cdm#work_contains_alinea">
+    <rdfs:subPropertyOf rdf:resource="&OP;work_contains_subdivision"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://publications.europa.eu/ontology/cdm#work_contains_annex">
+    <rdfs:subPropertyOf rdf:resource="&OP;work_contains_subdivision"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://publications.europa.eu/ontology/cdm#work_contains_appendix">
+    <rdfs:subPropertyOf rdf:resource="&OP;work_contains_subdivision"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://publications.europa.eu/ontology/cdm#work_contains_article_legal">
+    <rdfs:subPropertyOf rdf:resource="&OP;work_contains_subdivision"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://publications.europa.eu/ontology/cdm#work_contains_chapter_legal">
+    <rdfs:subPropertyOf rdf:resource="&OP;work_contains_subdivision"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://publications.europa.eu/ontology/cdm#work_contains_citation">
+    <rdfs:subPropertyOf rdf:resource="&OP;work_contains_subdivision"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://publications.europa.eu/ontology/cdm#work_contains_clause_legal">
+    <rdfs:subPropertyOf rdf:resource="&OP;work_contains_subdivision"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://publications.europa.eu/ontology/cdm#work_contains_indent">
+    <rdfs:subPropertyOf rdf:resource="&OP;work_contains_subdivision"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://publications.europa.eu/ontology/cdm#work_contains_paragraph_legal">
+    <rdfs:subPropertyOf rdf:resource="&OP;work_contains_subdivision"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://publications.europa.eu/ontology/cdm#work_contains_part_legal">
+    <rdfs:subPropertyOf rdf:resource="&OP;work_contains_subdivision"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://publications.europa.eu/ontology/cdm#work_contains_point">
+    <rdfs:subPropertyOf rdf:resource="&OP;work_contains_subdivision"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://publications.europa.eu/ontology/cdm#work_contains_preamble">
+    <rdfs:subPropertyOf rdf:resource="&OP;work_contains_subdivision"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://publications.europa.eu/ontology/cdm#work_contains_recital">
+    <rdfs:subPropertyOf rdf:resource="&OP;work_contains_subdivision"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://publications.europa.eu/ontology/cdm#work_contains_rule_legal">
+    <rdfs:subPropertyOf rdf:resource="&OP;work_contains_subdivision"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://publications.europa.eu/ontology/cdm#work_contains_section_legal">
+    <rdfs:subPropertyOf rdf:resource="&OP;work_contains_subdivision"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://publications.europa.eu/ontology/cdm#work_contains_title_legal">
+    <rdfs:subPropertyOf rdf:resource="&OP;work_contains_subdivision"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="http://publications.europa.eu/ontology/cdm#alinea_part_of_work">
+    <rdfs:subPropertyOf rdf:resource="&OP;subdivision_part_of_work"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://publications.europa.eu/ontology/cdm#annex_part_of_work">
+    <rdfs:subPropertyOf rdf:resource="&OP;subdivision_part_of_work"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://publications.europa.eu/ontology/cdm#appendix_part_of_work">
+    <rdfs:subPropertyOf rdf:resource="&OP;subdivision_part_of_work"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://publications.europa.eu/ontology/cdm#article_legal_part_of_work">
+    <rdfs:subPropertyOf rdf:resource="&OP;subdivision_part_of_work"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://publications.europa.eu/ontology/cdm#chapter_legal_part_of_work">
+    <rdfs:subPropertyOf rdf:resource="&OP;subdivision_part_of_work"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://publications.europa.eu/ontology/cdm#citation_part_of_work">
+    <rdfs:subPropertyOf rdf:resource="&OP;subdivision_part_of_work"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://publications.europa.eu/ontology/cdm#clause_legal_part_of_work">
+    <rdfs:subPropertyOf rdf:resource="&OP;subdivision_part_of_work"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://publications.europa.eu/ontology/cdm#indent_part_of_work">
+    <rdfs:subPropertyOf rdf:resource="&OP;subdivision_part_of_work"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://publications.europa.eu/ontology/cdm#paragraph_legal_part_of_work">
+    <rdfs:subPropertyOf rdf:resource="&OP;subdivision_part_of_work"/>
+  </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="http://publications.europa.eu/ontology/cdm#part_legal_part_of_work">
+    <rdfs:subPropertyOf rdf:resource="&OP;subdivision_part_of_work"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://publications.europa.eu/ontology/cdm#point_part_of_work">
+    <rdfs:subPropertyOf rdf:resource="&OP;subdivision_part_of_work"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://publications.europa.eu/ontology/cdm#preamble_part_of_work">
+    <rdfs:subPropertyOf rdf:resource="&OP;subdivision_part_of_work"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://publications.europa.eu/ontology/cdm#recital_part_of_work">
+    <rdfs:subPropertyOf rdf:resource="&OP;subdivision_part_of_work"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://publications.europa.eu/ontology/cdm#rule_legal_part_of_work">
+    <rdfs:subPropertyOf rdf:resource="&OP;subdivision_part_of_work"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://publications.europa.eu/ontology/cdm#section_legal_part_of_work">
+    <rdfs:subPropertyOf rdf:resource="&OP;subdivision_part_of_work"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://publications.europa.eu/ontology/cdm#title_legal_part_of_work">
+    <rdfs:subPropertyOf rdf:resource="&OP;subdivision_part_of_work"/>
+  </owl:ObjectProperty>
+  
+  <!-- is about -->
+  <owl:ObjectProperty rdf:about="&OP;case-law_is_about_concept">
+    <rdfs:subPropertyOf rdf:resource="&OP;is_about"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="&OP;case-law_is_about_concept_case-law">
+    <rdfs:subPropertyOf rdf:resource="&OP;case-law_is_about_concept"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="&OP;case-law_is_about_concept_new_case-law">
+    <rdfs:subPropertyOf rdf:resource="&OP;case-law_is_about_concept"/>
+  </owl:ObjectProperty><owl:ObjectProperty rdf:about="&OP;dossier_contains_event_legal">
+    <rdfs:subPropertyOf rdf:resource="&OP;dossier_contains_event"/>
+  </owl:ObjectProperty>
+
+  <!-- created by -->
+  <owl:ObjectProperty rdf:about="&OP;work_authored_by_agent">
+    <rdfs:subPropertyOf rdf:resource="&OP;work_created_by_agent"/>
+  </owl:ObjectProperty>
+
+ <owl:ObjectProperty rdf:about="&OP;work_compiled_by_agent">
+    <rdfs:subPropertyOf rdf:resource="&OP;work_created_by_agent"/>
+  </owl:ObjectProperty>
+
+  <!-- contributed to -->
+  <owl:ObjectProperty rdf:about="&OP;work_edited_by_agent">
+    <rdfs:subPropertyOf rdf:resource="&OP;work_contributed_to_by_agent"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="&OP;work_illustrated_by_agent">
+    <rdfs:subPropertyOf rdf:resource="&OP;work_contributed_to_by_agent"/>
+  </owl:ObjectProperty>
+
+ <owl:ObjectProperty rdf:about="&OP;work_translated_by_agent">
+    <rdfs:subPropertyOf rdf:resource="&OP;work_contributed_to_by_agent"/>
+  </owl:ObjectProperty>
+
+  <!-- documentation_documents_work_dataset -->
+  <owl:ObjectProperty rdf:about="&OP;documentation_documents_work_dataset">
+    <rdfs:subPropertyOf rdf:resource="&OP;work_explains_work"/>
+  </owl:ObjectProperty>
+  
+  <!-- work_dataset_has_documentation_documentation -->
+  <owl:ObjectProperty rdf:about="&OP;work_dataset_has_documentation_documentation">
+    <rdfs:subPropertyOf rdf:resource="&OP;work_explained_by_work"/>
+  </owl:ObjectProperty>
+
+ <!-- measure_national_implementing_implements_resource_legal -->
+  <owl:ObjectProperty rdf:about="&OP;measure_national_implementing_implements_directive">
+    <rdfs:subPropertyOf rdf:resource="&OP;measure_national_implementing_implements_resource_legal"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="&OP;directive_implemented_by_measure_national_implementing">
+    <rdfs:subPropertyOf rdf:resource="&OP;resource_legal_implemented_by_measure_national_implementing"/>
+  </owl:ObjectProperty>
+
+
+ <!--owl:ObjectProperty rdf:about="&OP;work_has_contributor_agent">
+    <rdfs:subPropertyOf rdf:resource="&OP;work_created_by_agent"/>
+  </owl:ObjectProperty-->
+
+  <!-- Changes needed for the migration of properties from event_legal to event -->
+  <owl:ObjectProperty rdf:about="&OP;event_legal_part_of_dossier">
+    <!-- Make dossier_contains_event_legal and
+         event_legal_part_of_dossier subproperties of their respective
+         preferred properties dossier_contains_event and
+         event_part_of_dossier to facilitate migration from those
+         deprecated properties. Date: 2013-10-03 -->
+    <rdfs:subPropertyOf rdf:resource="&OP;event_part_of_dossier"/>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:about="&OP;event_legal_date">
+    <rdfs:subPropertyOf rdf:resource="&OP;event_date"/>
+  </owl:DatatypeProperty>
+  <owl:ObjectProperty rdf:about="&OP;event_legal_has_type_concept_type_event_legal">
+    <rdfs:subPropertyOf rdf:resource="&OP;event_has_type_concept_type_event"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="&OP;event_legal_responsibility_of_person">
+    <rdfs:subPropertyOf rdf:resource="&OP;event_responsibility_of_person"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="&OP;event_legal_joint-responsibility_of_person">
+    <rdfs:subPropertyOf rdf:resource="&OP;event_joint-responsibility_of_person"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="&OP;event_legal_responsibility_of_institution">
+    <rdfs:subPropertyOf rdf:resource="&OP;event_responsibility_of_institution"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="&OP;event_legal_joint-responsibility_of_institution">
+    <rdfs:subPropertyOf rdf:resource="&OP;event_joint-responsibility_of_institution"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="&OP;event_legal_addresses_institution">
+    <rdfs:subPropertyOf rdf:resource="&OP;event_addresses_institution"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="&OP;event_legal_formally-addresses_institution">
+    <rdfs:subPropertyOf rdf:resource="&OP;event_formally-addresses_institution"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="&OP;event_legal_informs_institution">
+    <rdfs:subPropertyOf rdf:resource="&OP;event_informs_institution"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="&OP;event_legal_associated_with_person">
+    <rdfs:subPropertyOf rdf:resource="&OP;event_associated_with_person"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="&OP;event_legal_associated_with_institution">
+    <rdfs:subPropertyOf rdf:resource="&OP;event_associated_with_institution"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="&OP;event_legal_initiated_by_institution">
+    <rdfs:subPropertyOf rdf:resource="&OP;event_initiated_by_institution"/>
+  </owl:ObjectProperty>
+   <owl:ObjectProperty rdf:about="&OP;event_legal_contains_work">
+    <rdfs:subPropertyOf rdf:resource="&OP;event_contains_work"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="&OP;event_legal_based_on_resource_legal">
+    <rdfs:subPropertyOf rdf:resource="&OP;event_based_on_resource_legal"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="&OP;procedure_code_interinstitutional_based_on_resource_legal">
+    <rdfs:subPropertyOf rdf:resource="&OP;dossier_based_on_resource_legal"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="&OP;procedure_without_code_interinstitutional_based_on_resource_legal">
+    <rdfs:subPropertyOf rdf:resource="&OP;dossier_based_on_resource_legal"/>
+  </owl:ObjectProperty>
+
+  <!-- make the Official journal a subclass also of legal resource -->
+  <owl:Class rdf:about="http://publications.europa.eu/ontology/cdm#official-journal">
+    <rdfs:subClassOf rdf:resource="http://publications.europa.eu/ontology/cdm#resource_legal"/>
+  </owl:Class>
+  
+  <!-- Based on the assumption that work_related_to_work is never explicitly stated but inferred (cf. CADMOS-2162) -->
+  <rdf:Description rdf:about="&OP;resource_legal_related_to_resource_legal">
+	  <rdfs:subPropertyOf rdf:resource="&OP;work_related_to_work"/>
+  </rdf:Description>
+  
+  <!-- cmr:lastModificationDate -->
+	<owl:DatatypeProperty rdf:about="http://publications.europa.eu/ontology/cdm/cmr#lastModificationDate" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:owl="http://www.w3.org/2002/07/owl#">
+		<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/> 
+	</owl:DatatypeProperty>
+	<owl:Class rdf:about="http://publications.europa.eu/ontology/cdm#work" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:owl="http://www.w3.org/2002/07/owl#">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="http://publications.europa.eu/ontology/cdm/cmr#lastModificationDate"/>
+				<owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+				<owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+	</owl:Class>
+	<owl:Class rdf:about="http://publications.europa.eu/ontology/cdm#expression" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:owl="http://www.w3.org/2002/07/owl#">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="http://publications.europa.eu/ontology/cdm/cmr#lastModificationDate"/>
+				<owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+				<owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+	</owl:Class>
+	<owl:Class rdf:about="http://publications.europa.eu/ontology/cdm#manifestation" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:owl="http://www.w3.org/2002/07/owl#">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="http://publications.europa.eu/ontology/cdm/cmr#lastModificationDate"/>
+				<owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+				<owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+	</owl:Class>
+	<owl:Class rdf:about="http://publications.europa.eu/ontology/cdm#agent" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:owl="http://www.w3.org/2002/07/owl#">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="http://publications.europa.eu/ontology/cdm/cmr#lastModificationDate"/>
+				<owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+				<owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+	</owl:Class>
+	<owl:Class rdf:about="http://publications.europa.eu/ontology/cdm#dossier" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:owl="http://www.w3.org/2002/07/owl#">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="http://publications.europa.eu/ontology/cdm/cmr#lastModificationDate"/>
+				<owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+				<owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+	</owl:Class>
+	<owl:Class rdf:about="http://publications.europa.eu/ontology/cdm#event" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:owl="http://www.w3.org/2002/07/owl#">
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="http://publications.europa.eu/ontology/cdm/cmr#lastModificationDate"/>
+				<owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+				<owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+	</owl:Class>
+	<!-- cmr:lastModificationDate -->
+	
+	<!-- http://publications.europa.eu/ontology/cdm/cmr#lang -->
+	<owl:DatatypeProperty rdf:about="http://publications.europa.eu/ontology/cdm/cmr#lang">
+		<!--rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/-->
+		<rdfs:label xml:lang="en">used language</rdfs:label>
+		<rdfs:comment xml:lang="en">May be applied on several objects.
+
+When applied on the cellar URI of an expression, it indicated the used languag of that expression.</rdfs:comment>
+		<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#language"/>
+		<rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+		<annotation:in_notice>true</annotation:in_notice>
+	</owl:DatatypeProperty>
+	
+	  <!-- cmr:creationDate -->
+	<owl:DatatypeProperty rdf:about="http://publications.europa.eu/ontology/cdm/cmr#creationDate" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:owl="http://www.w3.org/2002/07/owl#">
+		<rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/> 
+	</owl:DatatypeProperty>
+</rdf:RDF>

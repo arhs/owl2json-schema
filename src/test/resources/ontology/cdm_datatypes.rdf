@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!-- -*- mode: nxml; coding: utf-8; -*- -->
+<!DOCTYPE rdf:RDF [
+<!ENTITY owl "http://www.w3.org/2002/07/owl#">
+<!ENTITY cdm "http://publications.europa.eu/ontology/cdm#">
+<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
+<!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
+<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+<!ENTITY dt "http://publications.europa.eu/ontology/datatype#">
+]>
+<rdf:RDF xml:base="http://publications.europa.eu/ontology/datatype" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dt="http://publications.europa.eu/ontology/datatype#">
+  <owl:Ontology rdf:about="http://publications.europa.eu/ontology/datatype">
+    <owl:versionInfo rdf:datatype="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Version 4.1.8Id: cdm_datatypes.rdf 28691 2017-03-24 10:58:38Z kustema $</owl:versionInfo>
+  </owl:Ontology>
+  <!-- Example: http://ftp2.es.freebsd.org/CTAN/macros/latex/contrib/stex/sty/owl2onto/example.owl2 -->
+  <rdfs:Datatype rdf:about="&dt;date">
+	<owl:equivalentClass>
+	  <rdfs:Datatype>
+		<owl:unionOf rdf:parseType="Collection">
+		  <rdf:Description rdf:about="&xsd;date"/>
+		  <rdf:Description rdf:about="&dt;unknown-date"/>
+		  <rdf:Description rdf:about="&xsd;gYear"/>
+		  <rdf:Description rdf:about="&xsd;gYearMonth"/>
+		</owl:unionOf>
+	  </rdfs:Datatype>
+	</owl:equivalentClass>
+  </rdfs:Datatype>
+  <rdfs:Datatype rdf:about="&dt;date">
+	<owl:equivalentClass>
+	  <rdfs:Datatype>
+		<owl:unionOf rdf:parseType="Collection">
+		  <rdf:Description rdf:about="&xsd;date"/>
+		  <rdf:Description rdf:about="&dt;unknown-date"/>
+		  <rdf:Description rdf:about="&xsd;gYear"/>
+		  <rdf:Description rdf:about="&xsd;gYearMonth"/>
+		</owl:unionOf>
+	  </rdfs:Datatype>
+	</owl:equivalentClass>
+  </rdfs:Datatype>
+  <rdfs:Datatype rdf:about="&dt;country+role-qualifier">
+	<owl:equivalentClass>
+	  <rdfs:Datatype>
+		<owl:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="&cdm;country"/>
+          <rdf:Description rdf:about="&cdm;role-qualifier"/>
+        </owl:unionOf>
+      </rdfs:Datatype>
+    </owl:equivalentClass>
+  </rdfs:Datatype>
+  <!-- Unknown date in the past (currently 00000000) or in the future (may never come, currently 99999999)  -->
+  <rdfs:Datatype rdf:about="&dt;unknown-date">
+	<owl:equivalentClass>
+      <rdfs:Datatype>
+        <owl:unionOf rdf:parseType="Collection">
+          <rdfs:Datatype>
+            <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            <owl:withRestrictions rdf:parseType="Collection">
+              <rdf:Description>
+                <xsd:pattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">unknown-future</xsd:pattern>
+              </rdf:Description>
+            </owl:withRestrictions>
+          </rdfs:Datatype>
+          <rdfs:Datatype>
+            <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            <owl:withRestrictions rdf:parseType="Collection">
+              <rdf:Description>
+                <xsd:pattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">unknown-past</xsd:pattern>
+              </rdf:Description>
+            </owl:withRestrictions>
+          </rdfs:Datatype>
+        </owl:unionOf>
+      </rdfs:Datatype>
+	</owl:equivalentClass>
+  </rdfs:Datatype>
+</rdf:RDF>

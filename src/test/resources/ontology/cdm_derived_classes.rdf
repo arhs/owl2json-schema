@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!DOCTYPE rdf:RDF [
+<!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+<!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+<!ENTITY import "http://publications.europa.eu/ontology/cdm/import#" >
+<!ENTITY deriv "http://publications.europa.eu/ontology/cdm/derived_class#">
+<!ENTITY OP "http://publications.europa.eu/ontology/cdm#" >
+]>
+
+<rdf:RDF 
+    xml:base="http://publications.europa.eu/ontology/cdm/derived_class" 
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:deriv="http://publications.europa.eu/ontology/cdm/derived_class#">
+  
+  <owl:Ontology rdf:about="http://publications.europa.eu/ontology/cdm/derived_class">
+      <owl:versionInfo rdf:datatype="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Version 4.1.8Id: cdm_derived_classes.rdf 28691 2017-03-24 10:58:38Z kustema $</owl:versionInfo>
+  </owl:Ontology>
+
+  <!--owl:Class rdf:about="&deriv;repertoire_resource_legal">
+    <rdfs:subClassOf rdf:resource="&OP;resource_legal"/>
+    <rdfs:subClassOf>
+      <rdfs:Restriction>
+	<owl:onProperty rdf:resource="&OP;repertoire_resource_legal_repertoire"/>
+	<owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+      </rdfs:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <rdfs:Restriction>
+	<owl:onProperty rdf:resource="&OP;resource_legal_is_about_concept_directory-code"/>
+	<owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+      </rdfs:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class-->
+  
+  <!-- value is either DEPH or REPH -->
+  <!--
+      <owl:Class rdf:about="&deriv;ephemeral_resource_legal">
+      <rdfs:subClassOf rdf:resource="&OP;resource_legal"/>
+      <rdfs:subClassOf>
+      <owl:Restriction>
+      <owl:onProperty rdf:resource="&OP;resource_legal_type_act"/>
+      <owl:someValuesFrom>
+      <owl:DataRange>  
+      <owl:oneOf>
+      <rdf:List>
+      <rdf:first rdf:datatype="&xsd;string">DEPH</rdf:first>
+      <rdf:rest>
+      <rdf:List>
+      <rdf:first rdf:datatype="&xsd;string">REPH</rdf:first>
+      <rdf:rest rdf:resource="&rdf;nil" />
+      </rdf:List>
+      </rdf:rest>
+      </rdf:List>
+      </owl:oneOf>
+      </owl:DataRange>
+      </owl:someValuesFrom>
+      </owl:Restriction>
+      </rdfs:subClassOf>
+      </owl:Class>
+  -->
+</rdf:RDF>

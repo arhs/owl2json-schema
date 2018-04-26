@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- JDS: used entities to replace "http://publications.europa.eu/cellar/ontologies/CMROntology.owl/1.0/owl/ontology#" by "http://publications.europa.eu/ontology/cdm#"  -->
+
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:ontology="http://publications.europa.eu/ontology/cdm#">
+	<ontology:decision rdf:about="&resource;oj/JOL_2012_000_R_1066">
+		<ontology:work_title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Rapporto sul settimo sbarco lunare Apollo 18 - WORK</ontology:work_title>
+		<ontology:work_id_document rdf:datatype="http://www.w3.org/2001/XMLSchema#string">celex:00000D1066</ontology:work_id_document>
+		<ontology:work_id_document rdf:datatype="http://www.w3.org/2001/XMLSchema#string">oj:JOL_2012_000_R_1066</ontology:work_id_document>
+		<ontology:work_date_document rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2012-01-01</ontology:work_date_document>
+		<ontology:work_created_by_agent rdf:resource="http://publications.europa.eu/resource/authority/corporate-body/COMM"/>
+		<ontology:resource_legal_type rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D</ontology:resource_legal_type>
+		<ontology:resource_legal_has_type_act_concept_type_act rdf:resource="http://publications.europa.eu/resource/authority/fd_030/DECISION"/>
+		<ontology:resource_legal_year rdf:datatype="http://www.w3.org/2001/XMLSchema#gYear">2012</ontology:resource_legal_year>
+		<ontology:resource_legal_id_sector rdf:datatype="http://www.w3.org/2001/XMLSchema#string">3</ontology:resource_legal_id_sector>
+		<ontology:resource_legal_id_celex rdf:datatype="http://www.w3.org/2001/XMLSchema#string">00000D1066</ontology:resource_legal_id_celex>
+	</ontology:decision>
+	<ontology:expression rdf:about="&resource;celex/00000D1066.ita">
+		<ontology:expression_title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Rapporto sul settimo sbarco lunare Apollo 18 - EXPRESSION</ontology:expression_title>
+		<ontology:expression_title_information_additional rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CELEX1</ontology:expression_title_information_additional>
+		<ontology:expression_uses_language rdf:resource="http://publications.europa.eu/resource/authority/language/ITA"/>
+		<ontology:expression_belongs_to_work rdf:resource="&resource;celex/00000D1066"/>
+	</ontology:expression>
+	<ontology:manifestation rdf:about="&resource;celex/00000D1066.ita.PDF">
+		<ontology:manifestation_type rdf:datatype="http://www.w3.org/2001/XMLSchema#string">pdf1x</ontology:manifestation_type>
+		<ontology:manifestation_manifests_expression rdf:resource="&resource;celex/00000D1066.ita"/>
+	</ontology:manifestation>
+</rdf:RDF>

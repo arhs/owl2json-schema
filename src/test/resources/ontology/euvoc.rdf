@@ -1,0 +1,2775 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY terms "http://purl.org/dc/terms/" >
+    <!ENTITY lvont "http://lexvo.org/ontology#" >
+    <!ENTITY adms "http://www.w3.org/ns/adms#" >
+    <!ENTITY prov "http://www.w3.org/ns/prov#" >
+    <!ENTITY void "http://vocab.deri.ie/void#" >
+    <!ENTITY dcat "http://www.w3.org/ns/dcat#" >
+    <!ENTITY person "http://www.w3.org/ns/person#" >
+    <!ENTITY lemon "http://lemon-model.net/lemon#" >
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY dc "http://purl.org/dc/elements/1.1/" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY skosxl "http://www.w3.org/2008/05/skos-xl#" >
+    <!ENTITY skos "http://www.w3.org/2004/02/skos/core#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY geo "http://www.w3.org/2003/01/geo/wgs84_pos#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+    <!ENTITY cdm "http://publications.europa.eu/ontology/cdm#" >
+    <!ENTITY lexinfo "http://www.lexinfo.net/ontology/2.0/lexinfo#" >
+    <!ENTITY euvoc "http://publications.europa.eu/ontology/euvoc#" >
+]>
+
+
+<rdf:RDF xmlns="http://publications.europa.eu/ontology/euvoc#"
+     xml:base="http://publications.europa.eu/ontology/euvoc"
+     xmlns:lvont="http://lexvo.org/ontology#"
+     xmlns:void="http://vocab.deri.ie/void#"
+     xmlns:adms="http://www.w3.org/ns/adms#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:lexinfo="http://www.lexinfo.net/ontology/2.0/lexinfo#"
+     xmlns:cdm="http://publications.europa.eu/ontology/cdm#"
+     xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+     xmlns:lemon="http://lemon-model.net/lemon#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:terms="http://purl.org/dc/terms/"
+     xmlns:person="http://www.w3.org/ns/person#"
+     xmlns:euvoc="http://publications.europa.eu/ontology/euvoc#"
+     xmlns:dcat="http://www.w3.org/ns/dcat#"
+     xmlns:prov="http://www.w3.org/ns/prov#"
+     xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <owl:Ontology rdf:about="http://publications.europa.eu/ontology/euvoc">
+        <rdfs:comment xml:lang="en">Euvoc ontology defines a set of properties used to enrich skos, org and dcat ontologies. 
+
+Properties defined in Euvoc are used by:
+- skos Publications Office application profile (SKOS-AP-EU) 
+- org Publications Office application profile (ORG-AP-OP) 
+- dcat Publications Office application profile (DCAT-AP-OP)
+- cdm ontology used for the CELLAR. The euvoc ontology is imported in cdm ontology starting on version 4 of the cdm ontology</rdfs:comment>
+        <owl:versionInfo xml:lang="en">Version 1.09    euvoc.rdf 2015-10-09</owl:versionInfo>
+        <rdfs:comment xml:lang="en">v1.00 alpha 1 to V1.00 alpha 2
+1) org:classification has a range: OrganizationType
+2) euvoc:xlType change to euvoc:xlClassification
+
+v1.00 alpha 2 to V1.00 alpha 3
+1) property prov:hadPrimarySource not use any more, use dct:source instead
+2) property euvoc:thesStatus is renamed euvoc:status (used for skos:Concept and skos-xl:Label)
+3) property iso:status is added,  euvoc:status (used for skos:Concept and skos-xl:Label)
+4) use euvoc:endDate instead prov:invalidatedAtTime 
+5) use euvoc:startDate instead of prov:generatedAtTime 
+6) foaf:img is removed from org:Organization, use foaf:depiction instead
+
+v1.00 alpha 3 to V1.00 2015/05/06
+1) iso:status is suppressed, we use euvoc:status
+2) http://publications.europa.eu/resource/authority/grammatical-gender is declared as the sexuel gender table and made equivalent to class gender instead of sdmx:sex
+3) dct:creator is suppressed as object property, it was already declared as data property
+
+V1.00 to V1.01 2015/05/08
+1) correct a mistake on a euvoc restriction which was express in the org ontology intead of euvoc
+2) suppress the issued date of the euvoc ontology in the metadata of the ontology
+
+V1.01 to V1.02 2015/05/08
+http://publications.europa.eu/resource/authority/license changed to  http://publications.europa.eu/resource/authority/licence (name of a MDR authority)
+
+V1.02 to V1.03 2015/7/14
+correct mistakes : Concept was declared as equivalent to &quot;Frequency&quot; and Concept had cdm subclasses : both were removed
+
+V1.03 to V1.04 2015/7/15
+adding data property endDate and startDate to skos-xl:Label
+delete decrecated classes from vcard ontology. Change the uri of the classes which were defined in cdm namespace to give them a uri in euvoc namespace (corporate, country, place, concept-eurovoc, language). Change on Site class which was defined as a subclass of Document when it is a subclass of Thing.
+
+V1.04 to V1.05 2015/7/15
+added euvoc:startDate and euvoc:endDate to org:Membership instead of Prov properties
+
+V1.05 to V1.06 2015/07/17
+because of extreme delays (up to ~2 hours) during the inference with Pellet
+we removed on skos:Concept and vcard:Kind, but also anywere else the constraint on properties which used owl:onDataRange. To do this the data type is assigned to rdfs:Literal for all the property constraints.
+
+V1.06 to V1.07 2015/07/24
+-euvoc:license property replaces dcterms:license property
+-euvoc:contributor property replaces dcterms:contributor
+-suppression of dcterms properties declaration when they were both declared as annotation and data of object property
+-euvoc does not import void, dcterms, adms ontologies any more, classes and property are redeclared inside euvoc, to avoid potential conflicts coming from those ontologies
+
+v1.07 to V1.08 2015/07/29
+-class Domain changed to DomainEuroVoc
+-ConceptScheme are classified with the property euvoc:domain range DomainEuroVoc
+-Range of dcat:theme is now EuroVoc waiting for the final MDR table
+
+v1.08 to V1.09 2015/10/09
+- Creation of the class DatasetTheme, subclass of skos:Concept, equivalent to MDR table dataset-theme
+- Range of dcat:theme is now DatasetTheme</rdfs:comment>
+        <owl:imports rdf:resource="http://www.w3.org/2006/vcard/ns"/>
+        <owl:imports rdf:resource="http://www.w3.org/2008/05/skos-xl"/>
+        <owl:imports rdf:resource="http://www.w3.org/ns/org#"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.org/dc/elements/1.1/contributor -->
+
+    <owl:AnnotationProperty rdf:about="&dc;contributor"/>
+    
+
+
+    <!-- http://purl.org/dc/elements/1.1/description -->
+
+    <owl:AnnotationProperty rdf:about="&dc;description"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/abstract -->
+
+    <owl:AnnotationProperty rdf:about="&terms;abstract">
+        <rdfs:subPropertyOf rdf:resource="&dc;description"/>
+        <rdfs:subPropertyOf rdf:resource="&terms;description"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- http://purl.org/dc/terms/alternative -->
+
+    <owl:AnnotationProperty rdf:about="&terms;alternative">
+        <rdfs:subPropertyOf rdf:resource="&terms;title"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- http://purl.org/dc/terms/contributor -->
+
+    <owl:AnnotationProperty rdf:about="&terms;contributor">
+        <rdfs:subPropertyOf rdf:resource="&dc;contributor"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- http://purl.org/dc/terms/description -->
+
+    <owl:AnnotationProperty rdf:about="&terms;description">
+        <rdfs:subPropertyOf rdf:resource="&dc;description"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- http://purl.org/dc/terms/relation -->
+
+    <owl:AnnotationProperty rdf:about="&terms;relation"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/rights -->
+
+    <owl:AnnotationProperty rdf:about="&terms;rights"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/source -->
+
+    <owl:AnnotationProperty rdf:about="&terms;source"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/tableOfContents -->
+
+    <owl:AnnotationProperty rdf:about="&terms;tableOfContents">
+        <rdfs:subPropertyOf rdf:resource="&dc;description"/>
+        <rdfs:subPropertyOf rdf:resource="&terms;description"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- http://purl.org/dc/terms/title -->
+
+    <owl:AnnotationProperty rdf:about="&terms;title"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Datatypes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.org/dc/terms/Box -->
+
+    <rdfs:Datatype rdf:about="&terms;Box"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/ISO3166 -->
+
+    <rdfs:Datatype rdf:about="&terms;ISO3166"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/ISO639-2 -->
+
+    <rdfs:Datatype rdf:about="&terms;ISO639-2"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/ISO639-3 -->
+
+    <rdfs:Datatype rdf:about="&terms;ISO639-3"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/Period -->
+
+    <rdfs:Datatype rdf:about="&terms;Period"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/Point -->
+
+    <rdfs:Datatype rdf:about="&terms;Point"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/RFC1766 -->
+
+    <rdfs:Datatype rdf:about="&terms;RFC1766"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/RFC3066 -->
+
+    <rdfs:Datatype rdf:about="&terms;RFC3066"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/RFC4646 -->
+
+    <rdfs:Datatype rdf:about="&terms;RFC4646"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/RFC5646 -->
+
+    <rdfs:Datatype rdf:about="&terms;RFC5646"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/URI -->
+
+    <rdfs:Datatype rdf:about="&terms;URI"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/W3CDTF -->
+
+    <rdfs:Datatype rdf:about="&terms;W3CDTF"/>
+    
+
+
+    <!-- http://www.w3.org/2001/XMLSchema#date -->
+
+    <rdfs:Datatype rdf:about="&xsd;date"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://lemon-model.net/lemon#context -->
+
+    <owl:ObjectProperty rdf:about="&lemon;context">
+        <rdfs:comment xml:lang="en">Denotes the pragmatic or discursive context of a sense mapping or a constraint on the mapping by syntactic or semantic properites.</rdfs:comment>
+        <rdfs:range rdf:resource="&lemon;LexicalContext"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://lexvo.org/ontology#inScript -->
+
+    <owl:ObjectProperty rdf:about="&lvont;inScript">
+        <rdfs:range rdf:resource="&lvont;Script"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#adjectivalForm -->
+
+    <owl:ObjectProperty rdf:about="&euvoc;adjectivalForm">
+        <rdfs:comment xml:lang="en">indicates the relation between the adjectival form and a noun. Both are instances of skosxl:Label.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#contributor -->
+
+    <owl:ObjectProperty rdf:about="&euvoc;contributor"/>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#countryCode -->
+
+    <owl:ObjectProperty rdf:about="&euvoc;countryCode">
+        <rdfs:comment xml:lang="en">Country, used to describe an address with vcard:Address.</rdfs:comment>
+        <rdfs:range rdf:resource="&euvoc;Country"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#domain -->
+
+    <owl:ObjectProperty rdf:about="&euvoc;domain">
+        <rdfs:comment xml:lang="en">To indicate the subject of the controlled vocabulary based on the Domain vocabulary, part of EuroVoc</rdfs:comment>
+        <rdfs:range rdf:resource="&euvoc;DomainEurovoc"/>
+        <rdfs:domain rdf:resource="&skos;ConceptScheme"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#downloadURL -->
+
+    <owl:ObjectProperty rdf:about="&euvoc;downloadURL">
+        <rdfs:range rdf:resource="&rdfs;Resource"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#getsReportingFrom -->
+
+    <owl:ObjectProperty rdf:about="&euvoc;getsReportingFrom">
+        <rdfs:comment xml:lang="en">indicates from who the person gets reporting from.</rdfs:comment>
+        <owl:inverseOf rdf:resource="&euvoc;reportsTo"/>
+        <rdfs:range rdf:resource="http://www.w3.org/ns/org#Membership"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#inhabitantNameForm -->
+
+    <owl:ObjectProperty rdf:about="&euvoc;inhabitantNameForm">
+        <rdfs:comment xml:lang="en">indicates the relation between  an inhabitant name form and the noun of the place they live in. Both are instances of skosxl:Label.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#license -->
+
+    <owl:ObjectProperty rdf:about="&euvoc;license">
+        <rdfs:range rdf:resource="&terms;LicenseDocument"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#localityCode -->
+
+    <owl:ObjectProperty rdf:about="&euvoc;localityCode">
+        <rdfs:comment xml:lang="en">Locality, used to describe an address with vcard:Address.</rdfs:comment>
+        <rdfs:range rdf:resource="&euvoc;Place"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#positionStatus -->
+
+    <owl:ObjectProperty rdf:about="&euvoc;positionStatus">
+        <rdfs:comment xml:lang="en">Allows to enrich the function with a controlled value.</rdfs:comment>
+        <rdfs:range rdf:resource="&euvoc;PositionStatus"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#reportsTo -->
+
+    <owl:ObjectProperty rdf:about="&euvoc;reportsTo">
+        <rdfs:comment xml:lang="en">Indicates the reporting link for example between a director and his assistant.Current value.</rdfs:comment>
+        <rdfs:range rdf:resource="http://www.w3.org/ns/org#Membership"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#represents -->
+
+    <owl:ObjectProperty rdf:about="&euvoc;represents">
+        <rdfs:comment xml:lang="en">A person in a membership can represent an agent. i.e. a civil servant represents the state in a board of administration, a deputy represents his country at the parliament.</rdfs:comment>
+        <rdfs:range rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#roleQualification -->
+
+    <owl:ObjectProperty rdf:about="&euvoc;roleQualification">
+        <rdfs:comment xml:lang="en">Indicates the type of position of the person. i.e. judge, deputy, director… Some business rules are related to this position, like the retention time of the personal information, the publication or not of some of the properties (you don&apos;t publish judge telephone number), the publication of the full given name or just the first letter….</rdfs:comment>
+        <rdfs:range rdf:resource="&euvoc;RoleQualification"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#status -->
+
+    <owl:ObjectProperty rdf:about="&euvoc;status">
+        <rdfs:comment xml:lang="en">Indicates the status of a skos:Concept or a skosxl:Label, or any resource related to controlled vocabulary management.</rdfs:comment>
+        <rdfs:range rdf:resource="&euvoc;ConceptStatus"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#xlClassification -->
+
+    <owl:ObjectProperty rdf:about="&euvoc;xlClassification">
+        <rdfs:comment xml:lang="en">Relates a resource to the historical values of org:classification.</rdfs:comment>
+        <rdfs:range rdf:resource="&euvoc;XlType"/>
+        <rdfs:domain rdf:resource="http://www.w3.org/ns/org#Organization"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#xlDefinition -->
+
+    <owl:ObjectProperty rdf:about="&euvoc;xlDefinition">
+        <rdfs:comment xml:lang="en">Relates a resource to the current and historical values of a skos:note.</rdfs:comment>
+        <rdfs:range rdf:resource="&euvoc;XlNote"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#xlGetsReportingFrom -->
+
+    <owl:ObjectProperty rdf:about="&euvoc;xlGetsReportingFrom">
+        <rdfs:comment xml:lang="en">Current value and historical values of the reporting relationship.</rdfs:comment>
+        <rdfs:range rdf:resource="&euvoc;XlSemanticRelation"/>
+        <owl:inverseOf rdf:resource="&euvoc;xlReportsTo"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#xlHasSubOrganization -->
+
+    <owl:ObjectProperty rdf:about="&euvoc;xlHasSubOrganization">
+        <rdfs:comment xml:lang="en">Relates an Organization to the current and historical values of org:hasSubOrganization.</rdfs:comment>
+        <rdfs:range rdf:resource="&euvoc;XlSemanticRelation"/>
+        <rdfs:domain rdf:resource="http://www.w3.org/ns/org#Organization"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#xlNotation -->
+
+    <owl:ObjectProperty rdf:about="&euvoc;xlNotation">
+        <rdfs:comment xml:lang="en">Relates a resource to a Notation value.</rdfs:comment>
+        <rdfs:range rdf:resource="&euvoc;XlNotation"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#xlObject -->
+
+    <owl:ObjectProperty rdf:about="&euvoc;xlObject">
+        <rdfs:comment xml:lang="en">When a semantic relationship is reified with euvoc:XlSemanticRelation (used for org:subOrganization or skos:broader for example), this property indicates the object of the relationship. The target of the relationship is indicated with the property euvo::xlTarget.</rdfs:comment>
+        <rdfs:domain rdf:resource="&euvoc;XlSemanticRelation"/>
+        <rdfs:range rdf:resource="&owl;Thing"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#xlOrder -->
+
+    <owl:ObjectProperty rdf:about="&euvoc;xlOrder">
+        <rdfs:comment xml:lang="en">Current value and historical values of the numerical value giving the order of the organization among its sibling organizations but also sibling memberships.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#xlPositionComplement -->
+
+    <owl:ObjectProperty rdf:about="&euvoc;xlPositionComplement">
+        <rdfs:comment xml:lang="en">actual and historical values of the position complemment.</rdfs:comment>
+        <rdfs:range rdf:resource="&euvoc;XlNote"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#xlProtocolLevel -->
+
+    <owl:ObjectProperty rdf:about="&euvoc;xlProtocolLevel">
+        <rdfs:comment xml:lang="en">Current value and historical values of the protocol-level.</rdfs:comment>
+        <rdfs:range rdf:resource="&euvoc;XlNumericalValue"/>
+        <rdfs:domain rdf:resource="http://www.w3.org/ns/org#Organization"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#xlReportsTo -->
+
+    <owl:ObjectProperty rdf:about="&euvoc;xlReportsTo">
+        <rdfs:comment xml:lang="en">Current value and historical values of the reporting relationship.</rdfs:comment>
+        <rdfs:range rdf:resource="&euvoc;XlSemanticRelation"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#xlSubOrganizationOf -->
+
+    <owl:ObjectProperty rdf:about="&euvoc;xlSubOrganizationOf">
+        <rdfs:comment xml:lang="en">Relates an Organization to the current and historical values of org:subOrganizationOf</rdfs:comment>
+        <rdfs:range rdf:resource="&euvoc;XlSemanticRelation"/>
+        <rdfs:domain rdf:resource="http://www.w3.org/ns/org#Organization"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#xlTarget -->
+
+    <owl:ObjectProperty rdf:about="&euvoc;xlTarget">
+        <rdfs:comment xml:lang="en">When a semantic relationship is reified with euvoc:XlSemanticRelation (used for org:subOrganization or skos:broader for example), this property indicates the target of the relationship. The object of the relationship is indicated with the property euvo:xlObject.</rdfs:comment>
+        <rdfs:domain rdf:resource="&euvoc;XlSemanticRelation"/>
+        <rdfs:range rdf:resource="&owl;Thing"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#xlTypeValue -->
+
+    <owl:ObjectProperty rdf:about="&euvoc;xlTypeValue">
+        <rdfs:comment xml:lang="en">Value of a Type when reified in the class euvo:XlType used to keep historical value of a type (used for org:classification historical values).</rdfs:comment>
+        <rdfs:domain rdf:resource="&euvoc;XlType"/>
+        <rdfs:range rdf:resource="&skos;Concept"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/dc/terms/accrualMethod -->
+
+    <owl:ObjectProperty rdf:about="&terms;accrualMethod"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/accrualPeriodicity -->
+
+    <owl:ObjectProperty rdf:about="&terms;accrualPeriodicity">
+        <rdfs:range rdf:resource="&terms;Frequency"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/dc/terms/accrualPolicy -->
+
+    <owl:ObjectProperty rdf:about="&terms;accrualPolicy"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/conformsTo -->
+
+    <owl:ObjectProperty rdf:about="&terms;conformsTo">
+        <rdfs:range rdf:resource="&terms;Standard"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/dc/terms/coverage -->
+
+    <owl:ObjectProperty rdf:about="&terms;coverage">
+        <rdfs:range rdf:resource="&terms;LocationPeriodOrJurisdiction"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/dc/terms/format -->
+
+    <owl:ObjectProperty rdf:about="&terms;format"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/hasPart -->
+
+    <owl:ObjectProperty rdf:about="&terms;hasPart"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/instructionalMethod -->
+
+    <owl:ObjectProperty rdf:about="&terms;instructionalMethod"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/language -->
+
+    <owl:ObjectProperty rdf:about="&terms;language">
+        <rdfs:range rdf:resource="&euvoc;Language"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/dc/terms/publisher -->
+
+    <owl:ObjectProperty rdf:about="&terms;publisher"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/rightsHolder -->
+
+    <owl:ObjectProperty rdf:about="&terms;rightsHolder"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/spatial -->
+
+    <owl:ObjectProperty rdf:about="&terms;spatial">
+        <rdfs:range rdf:resource="&terms;Location"/>
+        <rdfs:subPropertyOf rdf:resource="&terms;coverage"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/dc/terms/subject -->
+
+    <owl:ObjectProperty rdf:about="&terms;subject"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/temporal -->
+
+    <owl:ObjectProperty rdf:about="&terms;temporal">
+        <rdfs:range rdf:resource="&terms;PeriodOfTime"/>
+        <rdfs:subPropertyOf rdf:resource="&terms;coverage"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/dc/terms/type -->
+
+    <owl:ObjectProperty rdf:about="&terms;type">
+        <rdfs:range rdf:resource="&rdfs;Resource"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.lexinfo.net/ontology/2.0/lexinfo#acronymOf -->
+
+    <owl:ObjectProperty rdf:about="&lexinfo;acronymOf"/>
+    
+
+
+    <!-- http://www.lexinfo.net/ontology/2.0/lexinfo#fullFormFor -->
+
+    <owl:ObjectProperty rdf:about="&lexinfo;fullFormFor">
+        <rdfs:comment xml:lang="en">A linking element used to identify a relation between any full form of a term or lexical unit and its abbreviated form.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.lexinfo.net/ontology/2.0/lexinfo#gender -->
+
+    <owl:ObjectProperty rdf:about="&lexinfo;gender">
+        <rdfs:comment xml:lang="en">Indicates the grammatical gender of Label.</rdfs:comment>
+        <rdfs:range rdf:resource="&lexinfo;Gender"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.lexinfo.net/ontology/2.0/lexinfo#number -->
+
+    <owl:ObjectProperty rdf:about="&lexinfo;number">
+        <rdfs:comment xml:lang="en">In many languages, the grammatical distinction that indicates the number of objects referred to by the term or word.</rdfs:comment>
+        <rdfs:range rdf:resource="&lexinfo;Number"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.lexinfo.net/ontology/2.0/lexinfo#shortFormFor -->
+
+    <owl:ObjectProperty rdf:about="&lexinfo;shortFormFor">
+        <rdfs:comment xml:lang="en">A linking element used to identify a relation between a short form and its full or expanded form.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3.org/2002/07/owl#sameAs -->
+
+    <owl:ObjectProperty rdf:about="&owl;sameAs"/>
+    
+
+
+    <!-- http://www.w3.org/2003/01/geo/wgs84_pos#location -->
+
+    <owl:ObjectProperty rdf:about="&geo;location">
+        <rdfs:comment xml:lang="en">The relation between something and the point, 
+ or other geometrical thing in space, where it is.  For example, the realtionship between
+ a radio tower and a Point with a given lat and long.
+ Or a relationship between a park and its outline as a closed arc of points, or a road and
+ its location as a arc (a sequence of points).
+ Clearly in practice there will be limit to the accuracy of any such statement, but one would expect
+ an accuracy appropriate for the size of the object and uses such as mapping .</rdfs:comment>
+        <rdfs:range rdf:resource="&geo;SpatialThing"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3.org/2004/02/skos/core#inScheme -->
+
+    <owl:ObjectProperty rdf:about="&skos;inScheme"/>
+    
+
+
+    <!-- http://www.w3.org/2004/02/skos/core#topConceptOf -->
+
+    <owl:ObjectProperty rdf:about="&skos;topConceptOf"/>
+    
+
+
+    <!-- http://www.w3.org/2006/vcard/ns#hasAddress -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3.org/2006/vcard/ns#hasAddress"/>
+    
+
+
+    <!-- http://www.w3.org/2006/vcard/ns#hasEmail -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3.org/2006/vcard/ns#hasEmail"/>
+    
+
+
+    <!-- http://www.w3.org/2006/vcard/ns#hasGender -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3.org/2006/vcard/ns#hasGender"/>
+    
+
+
+    <!-- http://www.w3.org/2006/vcard/ns#hasHonorificPrefix -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3.org/2006/vcard/ns#hasHonorificPrefix"/>
+    
+
+
+    <!-- http://www.w3.org/2006/vcard/ns#hasHonorificSuffix -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3.org/2006/vcard/ns#hasHonorificSuffix"/>
+    
+
+
+    <!-- http://www.w3.org/2006/vcard/ns#hasTelephone -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3.org/2006/vcard/ns#hasTelephone"/>
+    
+
+
+    <!-- http://www.w3.org/2008/05/skos-xl#altLabel -->
+
+    <owl:ObjectProperty rdf:about="&skosxl;altLabel"/>
+    
+
+
+    <!-- http://www.w3.org/2008/05/skos-xl#hiddenLabel -->
+
+    <owl:ObjectProperty rdf:about="&skosxl;hiddenLabel"/>
+    
+
+
+    <!-- http://www.w3.org/2008/05/skos-xl#prefLabel -->
+
+    <owl:ObjectProperty rdf:about="&skosxl;prefLabel"/>
+    
+
+
+    <!-- http://www.w3.org/ns/adms#identifier -->
+
+    <owl:ObjectProperty rdf:about="&adms;identifier"/>
+    
+
+
+    <!-- http://www.w3.org/ns/adms#status -->
+
+    <owl:ObjectProperty rdf:about="&adms;status"/>
+    
+
+
+    <!-- http://www.w3.org/ns/dcat#accessURL -->
+
+    <owl:ObjectProperty rdf:about="&dcat;accessURL"/>
+    
+
+
+    <!-- http://www.w3.org/ns/dcat#contactPoint -->
+
+    <owl:ObjectProperty rdf:about="&dcat;contactPoint"/>
+    
+
+
+    <!-- http://www.w3.org/ns/dcat#distribution -->
+
+    <owl:ObjectProperty rdf:about="&dcat;distribution"/>
+    
+
+
+    <!-- http://www.w3.org/ns/dcat#landingPage -->
+
+    <owl:ObjectProperty rdf:about="&dcat;landingPage"/>
+    
+
+
+    <!-- http://www.w3.org/ns/dcat#mediaType -->
+
+    <owl:ObjectProperty rdf:about="&dcat;mediaType"/>
+    
+
+
+    <!-- http://www.w3.org/ns/dcat#theme -->
+
+    <owl:ObjectProperty rdf:about="&dcat;theme">
+        <rdfs:range rdf:resource="&euvoc;DatasetTheme"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3.org/ns/org#classification -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3.org/ns/org#classification"/>
+    
+
+
+    <!-- http://www.w3.org/ns/org#hasSite -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3.org/ns/org#hasSite"/>
+    
+
+
+    <!-- http://www.w3.org/ns/org#siteAddress -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3.org/ns/org#siteAddress"/>
+    
+
+
+    <!-- http://www.w3.org/ns/person#citizenship -->
+
+    <owl:ObjectProperty rdf:about="&person;citizenship">
+        <rdfs:comment xml:lang="en">The citizenship relationship links a Person to a Jurisdiction that has conferred citizenship rights on the individual such as the right to vote, to receive certain protection from the community or the issuance of a passport. Multiple citizenships are recorded as multiple instances of the citizenship relationship. (person ontology)
+The citizenship is used to indicates which country the person represents in its membership. (cdm note)</rdfs:comment>
+        <rdfs:range rdf:resource="&euvoc;Country"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/homepage -->
+
+    <owl:ObjectProperty rdf:about="http://xmlns.com/foaf/0.1/homepage"/>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/img -->
+
+    <owl:ObjectProperty rdf:about="http://xmlns.com/foaf/0.1/img"/>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/page -->
+
+    <owl:ObjectProperty rdf:about="http://xmlns.com/foaf/0.1/page"/>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/primaryTopic -->
+
+    <owl:ObjectProperty rdf:about="http://xmlns.com/foaf/0.1/primaryTopic"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#endDate -->
+
+    <owl:DatatypeProperty rdf:about="&euvoc;endDate">
+        <rdfs:comment xml:lang="en">Date ending a period of time.</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#officeAddress -->
+
+    <owl:DatatypeProperty rdf:about="&euvoc;officeAddress">
+        <rdfs:comment xml:lang="en">address of the office inside the building. Subproperty of vcard:street-address</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2006/vcard/ns#street-address"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#officialBirthName -->
+
+    <owl:DatatypeProperty rdf:about="&euvoc;officialBirthName">
+        <rdfs:comment xml:lang="en">Mainly to manage name of the person before marriage. In the original script.</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#officialFamilyName -->
+
+    <owl:DatatypeProperty rdf:about="&euvoc;officialFamilyName">
+        <rdfs:comment xml:lang="en">The family name of some person.  In the original script.</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#officialGivenName -->
+
+    <owl:DatatypeProperty rdf:about="&euvoc;officialGivenName">
+        <rdfs:comment xml:lang="en">The given name of some person. In the original script.</rdfs:comment>
+        <rdfs:range rdf:resource="&rdfs;Literal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#order -->
+
+    <owl:DatatypeProperty rdf:about="&euvoc;order">
+        <rdfs:comment xml:lang="en">Current value of the order of the resource among its siblings</rdfs:comment>
+        <rdfs:range rdf:resource="&xsd;integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#orderMethod -->
+
+    <owl:DatatypeProperty rdf:about="&euvoc;orderMethod">
+        <rdfs:comment xml:lang="en">Method used to order the related memberships  and sub-organisations. In 99% of the case the method  is based on the order number, not on alphabetic.xs:simpleType name=&quot;orderMethod&quot;&gt;, &lt;xs:restriction base=&quot;xs:string&quot;&gt;, &lt;xs:enumeration value=&quot;default&quot;/&gt;, &lt;xs:enumeration value=&quot;list&quot;/&gt;, &lt;xs:enumeration value=&quot;protocolar&quot;/&gt;, &lt;xs:enumeration value=&quot;alphabetic&quot;/&gt;, &lt;xs:enumeration value=&quot;id&quot;/&gt;</rdfs:comment>
+        <rdfs:range rdf:resource="&rdfs;Literal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#positionComplement -->
+
+    <owl:DatatypeProperty rdf:about="&euvoc;positionComplement">
+        <rdfs:comment xml:lang="en">Allows to enrich the position with a free text such as &quot;to the director&quot;, &quot;in charge of IT”..</rdfs:comment>
+        <rdfs:range rdf:resource="&rdfs;Literal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#protocolLevel -->
+
+    <owl:DatatypeProperty rdf:about="&euvoc;protocolLevel">
+        <rdfs:comment xml:lang="en">Current value of the protocol-level.</rdfs:comment>
+        <rdfs:range rdf:resource="&xsd;integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#startDate -->
+
+    <owl:DatatypeProperty rdf:about="&euvoc;startDate">
+        <rdfs:comment xml:lang="en">Date starting a period of time.</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#xlCodification -->
+
+    <owl:DatatypeProperty rdf:about="&euvoc;xlCodification">
+        <rdfs:comment xml:lang="en">This property is used to indicates the current and historical value of a skos:notation. It is a property of the class euvc:XlNotation which reifies notation of a resource.</rdfs:comment>
+        <rdfs:domain rdf:resource="&euvoc;XlNotation"/>
+        <rdfs:range rdf:resource="&rdfs;Literal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#xlNote -->
+
+    <owl:DatatypeProperty rdf:about="&euvoc;xlNote">
+        <rdfs:comment xml:lang="en">This property is used to indicates the current and historical value of a note, for example a skos:note. It is a property of the class euvc:XlNote which reifies notes on a resource.</rdfs:comment>
+        <rdfs:domain rdf:resource="&euvoc;XlNote"/>
+        <rdfs:range rdf:resource="&rdfs;Literal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#xlNumericalValue -->
+
+    <owl:DatatypeProperty rdf:about="&euvoc;xlNumericalValue">
+        <rdfs:comment xml:lang="en">This property is used to indicates the current and historical value of a numerical property. It is a property of euvoc:XlNumericalValue which reifies a numerical property of a resource.</rdfs:comment>
+        <rdfs:domain rdf:resource="&euvoc;XlNumericalValue"/>
+        <rdfs:range rdf:resource="&xsd;integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.org/dc/terms/available -->
+
+    <owl:DatatypeProperty rdf:about="&terms;available">
+        <rdfs:subPropertyOf rdf:resource="&terms;date"/>
+        <rdfs:range rdf:resource="&rdfs;Literal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.org/dc/terms/date -->
+
+    <owl:DatatypeProperty rdf:about="&terms;date">
+        <rdfs:range rdf:resource="&rdfs;Literal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.org/dc/terms/dateAccepted -->
+
+    <owl:DatatypeProperty rdf:about="&terms;dateAccepted">
+        <rdfs:subPropertyOf rdf:resource="&terms;date"/>
+        <rdfs:range rdf:resource="&rdfs;Literal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.org/dc/terms/dateCopyrighted -->
+
+    <owl:DatatypeProperty rdf:about="&terms;dateCopyrighted">
+        <rdfs:subPropertyOf rdf:resource="&terms;date"/>
+        <rdfs:range rdf:resource="&rdfs;Literal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.org/dc/terms/dateSubmitted -->
+
+    <owl:DatatypeProperty rdf:about="&terms;dateSubmitted">
+        <rdfs:subPropertyOf rdf:resource="&terms;date"/>
+        <rdfs:range rdf:resource="&rdfs;Literal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.org/dc/terms/identifier -->
+
+    <owl:DatatypeProperty rdf:about="&terms;identifier">
+        <rdfs:range rdf:resource="&rdfs;Literal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.org/dc/terms/issued -->
+
+    <owl:DatatypeProperty rdf:about="&terms;issued">
+        <rdfs:subPropertyOf rdf:resource="&terms;date"/>
+        <rdfs:range rdf:resource="&rdfs;Literal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.org/dc/terms/valid -->
+
+    <owl:DatatypeProperty rdf:about="&terms;valid">
+        <rdfs:subPropertyOf rdf:resource="&terms;date"/>
+        <rdfs:range rdf:resource="&rdfs;Literal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.w3.org/2003/01/geo/wgs84_pos#lat -->
+
+    <owl:DatatypeProperty rdf:about="&geo;lat">
+        <rdfs:comment xml:lang="en">The WGS84 latitude of a SpatialThing (decimal degrees).</rdfs:comment>
+        <rdfs:range rdf:resource="&rdfs;Literal"/>
+        <rdfs:domain rdf:resource="&geo;SpatialThing"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.w3.org/2003/01/geo/wgs84_pos#long -->
+
+    <owl:DatatypeProperty rdf:about="&geo;long">
+        <rdfs:comment xml:lang="en">The WGS84 longitude of a SpatialThing (decimal degrees).</rdfs:comment>
+        <rdfs:range rdf:resource="&rdfs;Literal"/>
+        <rdfs:domain rdf:resource="&geo;SpatialThing"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.w3.org/2004/02/skos/core#notation -->
+
+    <owl:DatatypeProperty rdf:about="&skos;notation"/>
+    
+
+
+    <!-- http://www.w3.org/2006/vcard/ns#bday -->
+
+    <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#bday"/>
+    
+
+
+    <!-- http://www.w3.org/2006/vcard/ns#country-name -->
+
+    <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#country-name"/>
+    
+
+
+    <!-- http://www.w3.org/2006/vcard/ns#locality -->
+
+    <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#locality"/>
+    
+
+
+    <!-- http://www.w3.org/2006/vcard/ns#postal-code -->
+
+    <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#postal-code"/>
+    
+
+
+    <!-- http://www.w3.org/2006/vcard/ns#region -->
+
+    <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#region"/>
+    
+
+
+    <!-- http://www.w3.org/2006/vcard/ns#street-address -->
+
+    <owl:DatatypeProperty rdf:about="http://www.w3.org/2006/vcard/ns#street-address"/>
+    
+
+
+    <!-- http://www.w3.org/ns/adms#versionNotes -->
+
+    <owl:DatatypeProperty rdf:about="&adms;versionNotes"/>
+    
+
+
+    <!-- http://www.w3.org/ns/dcat#keyword -->
+
+    <owl:DatatypeProperty rdf:about="&dcat;keyword"/>
+    
+
+
+    <!-- http://www.w3.org/ns/person#birthName -->
+
+    <owl:DatatypeProperty rdf:about="&person;birthName">
+        <rdfs:comment xml:lang="en">All data associated with an individual are subject to change. Names can change for a variety of reasons, either formally or informally, and new information may come to light that means that a correction or clarification can be made to an existing record. Birth names tend to be persistent however and for this reason they are recorded by some public sector information systems. There is no granularity for birth name - the full name should be recorded in a single field.</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/givenName -->
+
+    <owl:DatatypeProperty rdf:about="http://xmlns.com/foaf/0.1/givenName"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://lemon-model.net/lemon#LexicalContext -->
+
+    <owl:Class rdf:about="&lemon;LexicalContext">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&skos;inScheme"/>
+                <owl:hasValue rdf:resource="http://publications.europa.eu/resource/authority/use-context"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="&skos;Concept"/>
+        <rdfs:comment xml:lang="en">Contexts of usage of a property, like a label. The context can be a specific application or audience.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://lexvo.org/ontology#Script -->
+
+    <owl:Class rdf:about="&lvont;Script">
+        <rdfs:subClassOf rdf:resource="&skos;Concept"/>
+    </owl:Class>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#AddressType -->
+
+    <owl:Class rdf:about="&euvoc;AddressType">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&skos;inScheme"/>
+                <owl:hasValue rdf:resource="http://publications.europa.eu/resource/authority/address-type"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="&skos;Concept"/>
+    </owl:Class>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#AssetType -->
+
+    <owl:Class rdf:about="&euvoc;AssetType">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&skos;inScheme"/>
+                <owl:hasValue rdf:resource="http://purl.org/adms/assettype"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="&skos;Concept"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&terms;type"/>
+                <owl:onClass rdf:resource="&euvoc;AssetType"/>
+                <owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#ConceptStatus -->
+
+    <owl:Class rdf:about="&euvoc;ConceptStatus">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&skos;inScheme"/>
+                <owl:hasValue rdf:resource="http://publications.europa.eu/resource/authority/concept-status"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="&skos;Concept"/>
+    </owl:Class>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#Corporate -->
+
+    <owl:Class rdf:about="&euvoc;Corporate">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&skos;inScheme"/>
+                <owl:hasValue rdf:resource="http://publications.europa.eu/resource/authority/corporate-body"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="&skos;Concept"/>
+    </owl:Class>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#Country -->
+
+    <owl:Class rdf:about="&euvoc;Country">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&skos;inScheme"/>
+                <owl:hasValue rdf:resource="http://publications.europa.eu/resource/authority/country"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="&skos;Concept"/>
+    </owl:Class>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#DatasetStatus -->
+
+    <owl:Class rdf:about="&euvoc;DatasetStatus">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&skos;inScheme"/>
+                <owl:hasValue rdf:resource="http://purl.org/adms/status"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="&skos;Concept"/>
+    </owl:Class>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#DatasetTheme -->
+
+    <owl:Class rdf:about="&euvoc;DatasetTheme">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&skos;inScheme"/>
+                <owl:hasValue rdf:resource="http://publications.europa.eu/resource/authority/dataset-theme"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="&skos;Concept"/>
+    </owl:Class>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#DocumentationType -->
+
+    <owl:Class rdf:about="&euvoc;DocumentationType">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&skos;inScheme"/>
+                <owl:hasValue rdf:resource="http://publications.europa.eu/resource/authority/documentation-type"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="&skos;Concept"/>
+    </owl:Class>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#DomainEurovoc -->
+
+    <owl:Class rdf:about="&euvoc;DomainEurovoc">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&skos;inScheme"/>
+                <owl:hasValue rdf:resource="http://eurovoc.europa.eu/100000"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="&skos;Concept"/>
+    </owl:Class>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#EuroVoc -->
+
+    <owl:Class rdf:about="&euvoc;EuroVoc">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&skos;inScheme"/>
+                <owl:hasValue rdf:resource="http://eurovoc.europa.eu/100141"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="&skos;Concept"/>
+    </owl:Class>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#EventType -->
+
+    <owl:Class rdf:about="&euvoc;EventType">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&skos;inScheme"/>
+                <owl:hasValue rdf:resource="http://publications.europa.eu/resource/authority/event-type"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="&skos;Concept"/>
+    </owl:Class>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#HonorificTitle -->
+
+    <owl:Class rdf:about="&euvoc;HonorificTitle">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&skos;inScheme"/>
+                <owl:hasValue rdf:resource="http://publications.europa.eu/resource/authority/honorific"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="&skos;Concept"/>
+    </owl:Class>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#LabelType -->
+
+    <owl:Class rdf:about="&euvoc;LabelType">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&skos;inScheme"/>
+                <owl:hasValue rdf:resource="http://publications.europa.eu/resource/authority/label-type"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="&skos;Concept"/>
+        <rdfs:comment xml:lang="en">To define the type of the label property.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#Language -->
+
+    <owl:Class rdf:about="&euvoc;Language">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&skos;inScheme"/>
+                <owl:hasValue rdf:resource="http://publications.europa.eu/resource/authority/language"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="&skos;Concept"/>
+    </owl:Class>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#OrganizationType -->
+
+    <owl:Class rdf:about="&euvoc;OrganizationType">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&skos;inScheme"/>
+                <owl:hasValue rdf:resource="http://publications.europa.eu/resource/authority/organization-type"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="&skos;Concept"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&terms;type"/>
+                <owl:onClass rdf:resource="&euvoc;OrganizationType"/>
+                <owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#Place -->
+
+    <owl:Class rdf:about="&euvoc;Place">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&skos;inScheme"/>
+                <owl:hasValue rdf:resource="http://publications.europa.eu/resource/authority/place"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="&skos;Concept"/>
+    </owl:Class>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#PositionStatus -->
+
+    <owl:Class rdf:about="&euvoc;PositionStatus">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&skos;inScheme"/>
+                <owl:hasValue rdf:resource="http://publications.europa.eu/resource/authority/position-status"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="&skos;Concept"/>
+    </owl:Class>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#ProductForm -->
+
+    <owl:Class rdf:about="&euvoc;ProductForm">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&skos;inScheme"/>
+                <owl:hasValue rdf:resource="http://publications.europa.eu/resource/authority/product-form"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="&skos;Concept"/>
+    </owl:Class>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#RoleQualification -->
+
+    <owl:Class rdf:about="&euvoc;RoleQualification">
+        <rdfs:subClassOf rdf:resource="&skos;Concept"/>
+        <rdfs:comment xml:lang="en">Indicates the list of position a person may have. i.e. judge, deputy, director… Some business rules are related to this position, like the retention time of the personal information, the publication or not of some of the properties (you don&apos;t publish judge telephone number), the publication of the full given name or just the first letter….</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#Vocabulary -->
+
+    <owl:Class rdf:about="&euvoc;Vocabulary">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&skos;inScheme"/>
+                <owl:hasValue rdf:resource="http://publications.europa.eu/resource/authority/vocabulary"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="&skos;Concept"/>
+    </owl:Class>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#XlNotation -->
+
+    <owl:Class rdf:about="&euvoc;XlNotation">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&euvoc;endDate"/>
+                <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&euvoc;status"/>
+                <owl:onClass rdf:resource="&euvoc;ConceptStatus"/>
+                <owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&euvoc;startDate"/>
+                <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment xml:lang="en">Current value and historical values of skos:notation.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#XlNote -->
+
+    <owl:Class rdf:about="&euvoc;XlNote">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&euvoc;startDate"/>
+                <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&euvoc;endDate"/>
+                <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment xml:lang="en">Current value and historical values of skos:note</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#XlNumericalValue -->
+
+    <owl:Class rdf:about="&euvoc;XlNumericalValue">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&euvoc;startDate"/>
+                <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&euvoc;endDate"/>
+                <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment xml:lang="en">Current value and historical values of numerical properties. Used to store current and historical values of euvoc:protocolLevel</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#XlSemanticRelation -->
+
+    <owl:Class rdf:about="&euvoc;XlSemanticRelation">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&euvoc;startDate"/>
+                <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&euvoc;endDate"/>
+                <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment xml:lang="en">Current value and historical values of org:hasSubOrganization</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://publications.europa.eu/ontology/euvoc#XlType -->
+
+    <owl:Class rdf:about="&euvoc;XlType">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&euvoc;endDate"/>
+                <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&euvoc;startDate"/>
+                <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment xml:lang="en">Current value and historical values of org:classification.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/dc/terms/Frequency -->
+
+    <owl:Class rdf:about="&terms;Frequency">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&skos;inScheme"/>
+                <owl:hasValue rdf:resource="http://publications.europa.eu/resource/authority/frequency"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="&skos;Concept"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/dc/terms/Jurisdiction -->
+
+    <owl:Class rdf:about="&terms;Jurisdiction">
+        <rdfs:subClassOf rdf:resource="&terms;LocationPeriodOrJurisdiction"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/dc/terms/LicenseDocument -->
+
+    <owl:Class rdf:about="&terms;LicenseDocument">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&skos;inScheme"/>
+                <owl:hasValue rdf:resource="http://publications.europa.eu/resource/authority/licence"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="&terms;RightsStatement"/>
+        <rdfs:subClassOf rdf:resource="&skos;Concept"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/dc/terms/Location -->
+
+    <owl:Class rdf:about="&terms;Location">
+        <rdfs:subClassOf rdf:resource="&terms;LocationPeriodOrJurisdiction"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/dc/terms/LocationPeriodOrJurisdiction -->
+
+    <owl:Class rdf:about="&terms;LocationPeriodOrJurisdiction"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/MediaTypeOrExtent -->
+
+    <owl:Class rdf:about="&terms;MediaTypeOrExtent">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&skos;inScheme"/>
+                <owl:hasValue rdf:resource="http://publications.europa.eu/resource/authority/file-type"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="&skos;Concept"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/dc/terms/PeriodOfTime -->
+
+    <owl:Class rdf:about="&terms;PeriodOfTime">
+        <rdfs:subClassOf rdf:resource="&terms;LocationPeriodOrJurisdiction"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&terms;temporal"/>
+                <owl:someValuesFrom rdf:resource="&terms;PeriodOfTime"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/dc/terms/RightsStatement -->
+
+    <owl:Class rdf:about="&terms;RightsStatement"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/Standard -->
+
+    <owl:Class rdf:about="&terms;Standard">
+        <rdfs:subClassOf rdf:resource="&skos;Concept"/>
+    </owl:Class>
+    
+
+
+    <!-- http://rdfs.org/ns/void#Dataset -->
+
+    <owl:Class rdf:about="http://rdfs.org/ns/void#Dataset"/>
+    
+
+
+    <!-- http://rdfs.org/ns/void#DatasetDescription -->
+
+    <owl:Class rdf:about="http://rdfs.org/ns/void#DatasetDescription">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://xmlns.com/foaf/0.1/primaryTopic"/>
+                <owl:someValuesFrom rdf:resource="http://rdfs.org/ns/void#Dataset"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&terms;type"/>
+                <owl:onClass rdf:resource="&euvoc;DocumentationType"/>
+                <owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.lexinfo.net/ontology/2.0/lexinfo#Gender -->
+
+    <owl:Class rdf:about="&lexinfo;Gender">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&skos;inScheme"/>
+                <owl:hasValue rdf:resource="http://publications.europa.eu/resource/authority/grammatical-gender"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="&skos;Concept"/>
+        <rdfs:comment xml:lang="en">grammatical gender.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.lexinfo.net/ontology/2.0/lexinfo#Number -->
+
+    <owl:Class rdf:about="&lexinfo;Number">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&skos;inScheme"/>
+                <owl:hasValue rdf:resource="http://publications.europa.eu/resource/authority/number"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="&skos;Concept"/>
+        <rdfs:comment xml:lang="en">Number.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3.org/2000/01/rdf-schema#Resource -->
+
+    <owl:Class rdf:about="&rdfs;Resource"/>
+    
+
+
+    <!-- http://www.w3.org/2003/01/geo/wgs84_pos#Point -->
+
+    <owl:Class rdf:about="&geo;Point">
+        <rdfs:subClassOf rdf:resource="&geo;SpatialThing"/>
+        <rdfs:comment xml:lang="en">A point, typically described using a coordinate system relative to Earth, such as WGS84.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3.org/2003/01/geo/wgs84_pos#SpatialThing -->
+
+    <owl:Class rdf:about="&geo;SpatialThing"/>
+    
+
+
+    <!-- http://www.w3.org/2004/02/skos/core#Concept -->
+
+    <owl:Class rdf:about="&skos;Concept">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&euvoc;status"/>
+                <owl:someValuesFrom rdf:resource="&euvoc;ConceptStatus"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&terms;dateAccepted"/>
+                <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&euvoc;endDate"/>
+                <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&terms;type"/>
+                <owl:someValuesFrom rdf:resource="&euvoc;EuroVoc"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&euvoc;startDate"/>
+                <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&euvoc;xlNotation"/>
+                <owl:someValuesFrom rdf:resource="&euvoc;XlNotation"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&lemon;context"/>
+                <owl:someValuesFrom rdf:resource="&lemon;LexicalContext"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&terms;dateSubmitted"/>
+                <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&terms;hasPart"/>
+                <owl:someValuesFrom rdf:resource="&skos;Concept"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&terms;spatial"/>
+                <owl:someValuesFrom rdf:resource="&euvoc;Place"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&terms;spatial"/>
+                <owl:someValuesFrom rdf:resource="&euvoc;Country"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&euvoc;contributor"/>
+                <owl:someValuesFrom rdf:resource="&euvoc;Corporate"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&terms;subject"/>
+                <owl:someValuesFrom rdf:resource="&euvoc;EuroVoc"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3.org/2004/02/skos/core#ConceptScheme -->
+
+    <owl:Class rdf:about="&skos;ConceptScheme">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&terms;identifier"/>
+                <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&terms;hasPart"/>
+                <owl:someValuesFrom rdf:resource="&skos;ConceptScheme"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3.org/2006/vcard/ns#Address -->
+
+    <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Address">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3.org/2006/vcard/ns#street-address"/>
+                <owl:someValuesFrom rdf:resource="&rdfs;Literal"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3.org/2006/vcard/ns#locality"/>
+                <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&euvoc;officeAddress"/>
+                <owl:someValuesFrom rdf:resource="&rdfs;Literal"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3.org/2006/vcard/ns#country-name"/>
+                <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3.org/ns/org#hasSite"/>
+                <owl:onClass rdf:resource="http://www.w3.org/ns/org#Site"/>
+                <owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3.org/2006/vcard/ns#region"/>
+                <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&euvoc;localityCode"/>
+                <owl:onClass rdf:resource="&euvoc;Place"/>
+                <owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&euvoc;countryCode"/>
+                <owl:onClass rdf:resource="&euvoc;Country"/>
+                <owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&terms;type"/>
+                <owl:onClass rdf:resource="&euvoc;AddressType"/>
+                <owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3.org/2006/vcard/ns#postal-code"/>
+                <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3.org/2006/vcard/ns#Gender -->
+
+    <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Gender">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&skos;inScheme"/>
+                <owl:hasValue rdf:resource="http://publications.europa.eu/resource/authority/human-sex"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="&skos;Concept"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3.org/2006/vcard/ns#Kind -->
+
+    <owl:Class rdf:about="http://www.w3.org/2006/vcard/ns#Kind">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&geo;location"/>
+                <owl:someValuesFrom rdf:resource="&geo;SpatialThing"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3.org/2006/vcard/ns#hasEmail"/>
+                <owl:someValuesFrom rdf:resource="&rdfs;Resource"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3.org/2006/vcard/ns#hasTelephone"/>
+                <owl:someValuesFrom rdf:resource="&rdfs;Resource"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://xmlns.com/foaf/0.1/homepage"/>
+                <owl:someValuesFrom rdf:resource="http://xmlns.com/foaf/0.1/Document"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3.org/2006/vcard/ns#hasAddress"/>
+                <owl:someValuesFrom rdf:resource="http://www.w3.org/2006/vcard/ns#Address"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3.org/2008/05/skos-xl#Label -->
+
+    <owl:Class rdf:about="&skosxl;Label">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&euvoc;endDate"/>
+                <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&euvoc;startDate"/>
+                <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3.org/ns/adms#Identifier -->
+
+    <owl:Class rdf:about="&adms;Identifier"/>
+    
+
+
+    <!-- http://www.w3.org/ns/dcat#Dataset -->
+
+    <owl:Class rdf:about="&dcat;Dataset">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&euvoc;contributor"/>
+                <owl:someValuesFrom rdf:resource="&euvoc;Corporate"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&terms;accrualPeriodicity"/>
+                <owl:someValuesFrom rdf:resource="&terms;Frequency"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&adms;versionNotes"/>
+                <owl:someValuesFrom rdf:resource="&rdfs;Literal"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&dcat;landingPage"/>
+                <owl:onClass rdf:resource="http://xmlns.com/foaf/0.1/Document"/>
+                <owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&terms;language"/>
+                <owl:someValuesFrom rdf:resource="&euvoc;Language"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&terms;conformsTo"/>
+                <owl:someValuesFrom rdf:resource="&terms;Standard"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&terms;publisher"/>
+                <owl:someValuesFrom rdf:resource="&euvoc;Corporate"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&terms;temporal"/>
+                <owl:someValuesFrom rdf:resource="&terms;PeriodOfTime"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&dcat;distribution"/>
+                <owl:someValuesFrom rdf:resource="&dcat;Distribution"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://xmlns.com/foaf/0.1/page"/>
+                <owl:someValuesFrom rdf:resource="http://rdfs.org/ns/void#DatasetDescription"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&terms;spatial"/>
+                <owl:onClass rdf:resource="&euvoc;Country"/>
+                <owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&terms;hasPart"/>
+                <owl:someValuesFrom rdf:resource="&dcat;Dataset"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&dcat;keyword"/>
+                <owl:someValuesFrom rdf:resource="&rdfs;Literal"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&terms;spatial"/>
+                <owl:onClass rdf:resource="&euvoc;Place"/>
+                <owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&terms;subject"/>
+                <owl:someValuesFrom rdf:resource="&euvoc;EuroVoc"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&terms;issued"/>
+                <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&adms;identifier"/>
+                <owl:someValuesFrom rdf:resource="&adms;Identifier"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&adms;status"/>
+                <owl:onClass rdf:resource="&euvoc;DatasetStatus"/>
+                <owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&terms;identifier"/>
+                <owl:someValuesFrom rdf:resource="&rdfs;Literal"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3.org/ns/dcat#Distribution -->
+
+    <owl:Class rdf:about="&dcat;Distribution">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&terms;format"/>
+                <owl:onClass rdf:resource="&euvoc;ProductForm"/>
+                <owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&terms;issued"/>
+                <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&euvoc;downloadURL"/>
+                <owl:onClass rdf:resource="&rdfs;Resource"/>
+                <owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&adms;status"/>
+                <owl:onClass rdf:resource="&euvoc;DatasetStatus"/>
+                <owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&dcat;mediaType"/>
+                <owl:onClass rdf:resource="&terms;MediaTypeOrExtent"/>
+                <owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&dcat;accessURL"/>
+                <owl:someValuesFrom rdf:resource="&rdfs;Resource"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&euvoc;license"/>
+                <owl:onClass rdf:resource="&terms;LicenseDocument"/>
+                <owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3.org/ns/org#Membership -->
+
+    <owl:Class rdf:about="http://www.w3.org/ns/org#Membership">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&euvoc;represents"/>
+                <owl:someValuesFrom rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&euvoc;order"/>
+                <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&euvoc;roleQualification"/>
+                <owl:onClass rdf:resource="&euvoc;RoleQualification"/>
+                <owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&euvoc;xlOrder"/>
+                <owl:someValuesFrom rdf:resource="&euvoc;XlNumericalValue"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&euvoc;positionComplement"/>
+                <owl:someValuesFrom rdf:resource="&rdfs;Literal"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&euvoc;getsReportingFrom"/>
+                <owl:someValuesFrom rdf:resource="http://www.w3.org/ns/org#Membership"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&euvoc;xlReportsTo"/>
+                <owl:someValuesFrom rdf:resource="http://www.w3.org/ns/org#Membership"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&euvoc;startDate"/>
+                <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&euvoc;endDate"/>
+                <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&skos;notation"/>
+                <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&euvoc;xlPositionComplement"/>
+                <owl:someValuesFrom rdf:resource="&euvoc;XlNote"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&dcat;contactPoint"/>
+                <owl:someValuesFrom rdf:resource="http://www.w3.org/2006/vcard/ns#Kind"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&euvoc;xlDefinition"/>
+                <owl:someValuesFrom rdf:resource="&euvoc;XlNote"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&euvoc;xlGetsReportingFrom"/>
+                <owl:someValuesFrom rdf:resource="http://www.w3.org/ns/org#Membership"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&euvoc;reportsTo"/>
+                <owl:someValuesFrom rdf:resource="http://www.w3.org/ns/org#Membership"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&euvoc;positionStatus"/>
+                <owl:onClass rdf:resource="&euvoc;PositionStatus"/>
+                <owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3.org/ns/org#Organization -->
+
+    <owl:Class rdf:about="http://www.w3.org/ns/org#Organization">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&skos;inScheme"/>
+                <owl:onClass rdf:resource="&skos;ConceptScheme"/>
+                <owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minQualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&euvoc;xlOrder"/>
+                <owl:onClass rdf:resource="&euvoc;XlNumericalValue"/>
+                <owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&euvoc;xlProtocolLevel"/>
+                <owl:someValuesFrom rdf:resource="&euvoc;XlNumericalValue"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&euvoc;xlNotation"/>
+                <owl:someValuesFrom rdf:resource="&euvoc;XlNotation"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&euvoc;order"/>
+                <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&euvoc;xlClassification"/>
+                <owl:someValuesFrom rdf:resource="&euvoc;XlType"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&euvoc;protocolLevel"/>
+                <owl:someValuesFrom rdf:resource="&rdfs;Literal"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&euvoc;startDate"/>
+                <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3.org/ns/org#classification"/>
+                <owl:onClass rdf:resource="&euvoc;OrganizationType"/>
+                <owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&euvoc;orderMethod"/>
+                <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&dcat;contactPoint"/>
+                <owl:someValuesFrom rdf:resource="http://www.w3.org/2006/vcard/ns#Kind"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&euvoc;endDate"/>
+                <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&owl;sameAs"/>
+                <owl:someValuesFrom rdf:resource="&owl;Thing"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&skos;topConceptOf"/>
+                <owl:someValuesFrom rdf:resource="&skos;ConceptScheme"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&euvoc;xlDefinition"/>
+                <owl:someValuesFrom rdf:resource="&euvoc;XlNote"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3.org/ns/org#Role -->
+
+    <owl:Class rdf:about="http://www.w3.org/ns/org#Role">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&skos;inScheme"/>
+                <owl:hasValue rdf:resource="http://publications.europa.eu/resource/authority/position"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3.org/ns/org#Site -->
+
+    <owl:Class rdf:about="http://www.w3.org/ns/org#Site">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&skos;inScheme"/>
+                <owl:hasValue rdf:resource="http://publications.europa.eu/resource/authority/site"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="&skos;Concept"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&euvoc;startDate"/>
+                <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&euvoc;endDate"/>
+                <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3.org/ns/org#siteAddress"/>
+                <owl:someValuesFrom rdf:resource="http://www.w3.org/2006/vcard/ns#Kind"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/Agent -->
+
+    <owl:Class rdf:about="http://xmlns.com/foaf/0.1/Agent"/>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/Document -->
+
+    <owl:Class rdf:about="http://xmlns.com/foaf/0.1/Document"/>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/Image -->
+
+    <owl:Class rdf:about="http://xmlns.com/foaf/0.1/Image"/>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/Person -->
+
+    <owl:Class rdf:about="http://xmlns.com/foaf/0.1/Person">
+        <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&euvoc;officialBirthName"/>
+                <owl:someValuesFrom rdf:resource="&rdfs;Literal"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://xmlns.com/foaf/0.1/givenName"/>
+                <owl:someValuesFrom rdf:resource="&rdfs;Literal"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&euvoc;officialGivenName"/>
+                <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3.org/2006/vcard/ns#hasHonorificPrefix"/>
+                <owl:someValuesFrom rdf:resource="&euvoc;HonorificTitle"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&skos;notation"/>
+                <owl:someValuesFrom rdf:resource="&rdfs;Literal"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3.org/2006/vcard/ns#hasHonorificSuffix"/>
+                <owl:someValuesFrom rdf:resource="&euvoc;HonorificTitle"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://xmlns.com/foaf/0.1/img"/>
+                <owl:someValuesFrom rdf:resource="http://xmlns.com/foaf/0.1/Image"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&person;birthName"/>
+                <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&person;citizenship"/>
+                <owl:someValuesFrom rdf:resource="&euvoc;Country"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&euvoc;officialFamilyName"/>
+                <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3.org/2006/vcard/ns#bday"/>
+                <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3.org/2006/vcard/ns#hasGender"/>
+                <owl:onClass rdf:resource="http://www.w3.org/2006/vcard/ns#Gender"/>
+                <owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&lvont;inScript"/>
+                <owl:onClass rdf:resource="&lvont;Script"/>
+                <owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://eurovoc.europa.eu/100000 -->
+
+    <owl:NamedIndividual rdf:about="http://eurovoc.europa.eu/100000">
+        <rdfs:label xml:lang="en">Domain(EuroVoc)</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://eurovoc.europa.eu/100141 -->
+
+    <owl:NamedIndividual rdf:about="http://eurovoc.europa.eu/100141">
+        <rdfs:label xml:lang="en">EuroVoc</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://publications.europa.eu/resource/authority/address-type -->
+
+    <owl:NamedIndividual rdf:about="http://publications.europa.eu/resource/authority/address-type"/>
+    
+
+
+    <!-- http://publications.europa.eu/resource/authority/concept-status -->
+
+    <owl:NamedIndividual rdf:about="http://publications.europa.eu/resource/authority/concept-status"/>
+    
+
+
+    <!-- http://publications.europa.eu/resource/authority/corporate-body -->
+
+    <owl:NamedIndividual rdf:about="http://publications.europa.eu/resource/authority/corporate-body"/>
+    
+
+
+    <!-- http://publications.europa.eu/resource/authority/country -->
+
+    <owl:NamedIndividual rdf:about="http://publications.europa.eu/resource/authority/country"/>
+    
+
+
+    <!-- http://publications.europa.eu/resource/authority/documentation-type -->
+
+    <owl:NamedIndividual rdf:about="http://publications.europa.eu/resource/authority/documentation-type"/>
+    
+
+
+    <!-- http://publications.europa.eu/resource/authority/event-type -->
+
+    <owl:NamedIndividual rdf:about="http://publications.europa.eu/resource/authority/event-type"/>
+    
+
+
+    <!-- http://publications.europa.eu/resource/authority/file-type -->
+
+    <owl:NamedIndividual rdf:about="http://publications.europa.eu/resource/authority/file-type"/>
+    
+
+
+    <!-- http://publications.europa.eu/resource/authority/frequency -->
+
+    <owl:NamedIndividual rdf:about="http://publications.europa.eu/resource/authority/frequency"/>
+    
+
+
+    <!-- http://publications.europa.eu/resource/authority/grammatical-gender -->
+
+    <owl:NamedIndividual rdf:about="http://publications.europa.eu/resource/authority/grammatical-gender"/>
+    
+
+
+    <!-- http://publications.europa.eu/resource/authority/honorific -->
+
+    <owl:NamedIndividual rdf:about="http://publications.europa.eu/resource/authority/honorific"/>
+    
+
+
+    <!-- http://publications.europa.eu/resource/authority/human-sex -->
+
+    <owl:NamedIndividual rdf:about="http://publications.europa.eu/resource/authority/human-sex"/>
+    
+
+
+    <!-- http://publications.europa.eu/resource/authority/label-type -->
+
+    <owl:NamedIndividual rdf:about="http://publications.europa.eu/resource/authority/label-type"/>
+    
+
+
+    <!-- http://publications.europa.eu/resource/authority/language -->
+
+    <owl:NamedIndividual rdf:about="http://publications.europa.eu/resource/authority/language"/>
+    
+
+
+    <!-- http://publications.europa.eu/resource/authority/licence -->
+
+    <owl:NamedIndividual rdf:about="http://publications.europa.eu/resource/authority/licence"/>
+    
+
+
+    <!-- http://publications.europa.eu/resource/authority/number -->
+
+    <owl:NamedIndividual rdf:about="http://publications.europa.eu/resource/authority/number"/>
+    
+
+
+    <!-- http://publications.europa.eu/resource/authority/organization-type -->
+
+    <owl:NamedIndividual rdf:about="http://publications.europa.eu/resource/authority/organization-type"/>
+    
+
+
+    <!-- http://publications.europa.eu/resource/authority/place -->
+
+    <owl:NamedIndividual rdf:about="http://publications.europa.eu/resource/authority/place"/>
+    
+
+
+    <!-- http://publications.europa.eu/resource/authority/position -->
+
+    <owl:NamedIndividual rdf:about="http://publications.europa.eu/resource/authority/position"/>
+    
+
+
+    <!-- http://publications.europa.eu/resource/authority/position-status -->
+
+    <owl:NamedIndividual rdf:about="http://publications.europa.eu/resource/authority/position-status"/>
+    
+
+
+    <!-- http://publications.europa.eu/resource/authority/product-form -->
+
+    <owl:NamedIndividual rdf:about="http://publications.europa.eu/resource/authority/product-form"/>
+    
+
+
+    <!-- http://publications.europa.eu/resource/authority/role -->
+
+    <owl:NamedIndividual rdf:about="http://publications.europa.eu/resource/authority/role"/>
+    
+
+
+    <!-- http://publications.europa.eu/resource/authority/role-qualifier -->
+
+    <owl:NamedIndividual rdf:about="http://publications.europa.eu/resource/authority/role-qualifier"/>
+    
+
+
+    <!-- http://publications.europa.eu/resource/authority/site -->
+
+    <owl:NamedIndividual rdf:about="http://publications.europa.eu/resource/authority/site"/>
+    
+
+
+    <!-- http://publications.europa.eu/resource/authority/use-context -->
+
+    <owl:NamedIndividual rdf:about="http://publications.europa.eu/resource/authority/use-context"/>
+    
+
+
+    <!-- http://publications.europa.eu/resource/authority/vocabulary -->
+
+    <owl:NamedIndividual rdf:about="http://publications.europa.eu/resource/authority/vocabulary"/>
+    
+
+
+    <!-- http://purl.org/adms/assettype -->
+
+    <owl:NamedIndividual rdf:about="http://purl.org/adms/assettype"/>
+    
+
+
+    <!-- http://purl.org/adms/status -->
+
+    <owl:NamedIndividual rdf:about="http://purl.org/adms/status">
+        <rdfs:label xml:lang="en">status (adms)</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://publications.europa.eu/resource/authority/dataset-theme -->
+
+    <owl:Thing rdf:about="http://publications.europa.eu/resource/authority/dataset-theme">
+        <rdf:type rdf:resource="&owl;NamedIndividual"/>
+    </owl:Thing>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.5.0) http://owlapi.sourceforge.net -->
+

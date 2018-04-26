@@ -1,0 +1,314 @@
+<?xml version="1.0"?>
+<!-- -*- mode: nxml; coding: utf-8; -*- -->
+<!DOCTYPE rdf:RDF [
+<!ENTITY owl "http://www.w3.org/2002/07/owl#">
+<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
+<!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
+<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+<!ENTITY annotation "http://publications.europa.eu/ontology/annotation#">
+<!ENTITY cdm "http://publications.europa.eu/ontology/cdm#">
+]>
+<rdf:RDF xmlns="http://publications.europa.eu/ontology/annotation#" xml:base="http://publications.europa.eu/ontology/annotation" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:annotation="http://publications.europa.eu/ontology/annotation#">
+  <owl:Ontology rdf:about="http://publications.europa.eu/ontology/annotation">
+    <owl:versionInfo rdf:datatype="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Version 4.1.8Id: cdm_annotationproperties.rdf 28691 2017-03-24 10:58:38Z kustema $</owl:versionInfo>
+  </owl:Ontology>
+  <owl:AnnotationProperty rdf:about="&annotation;type_of_link_target">
+    <rdfs:label>Type of the link symbolized by this link target</rdfs:label>
+    <rdfs:comment>Value EA-SP to indicate that this relation is from the same procedure and should be displayed in Earlier (Subsequent) instruments on NEL</rdfs:comment>
+  </owl:AnnotationProperty>
+  <owl:AnnotationProperty rdf:about="&annotation;reference_to_modifying_location">
+    <rdfs:label>Indication of the location which has been changed</rdfs:label>
+    <rdfs:comment>Futher indication of the location which has been changed (e.g. 
+    <![CDATA[<PLACE_A>M</PLACE_A>]]>)</rdfs:comment>
+  </owl:AnnotationProperty>
+  <owl:AnnotationProperty rdf:about="&annotation;reference_to_modified_location">
+    <rdfs:label>Indication of the location which has been changed</rdfs:label>
+    <rdfs:comment>Futher indication of the location which has been changed (e.g. 
+    <![CDATA[<PLACE_P>PROT3 ANN 2</PLACE_P><DD_EV>1974/01/01</DD_EV>]]>)</rdfs:comment>
+  </owl:AnnotationProperty>
+  <owl:AnnotationProperty rdf:about="&annotation;role2">
+    <rdfs:label>Description of the target role for the amended act</rdfs:label>
+  </owl:AnnotationProperty>
+  <owl:AnnotationProperty rdf:about="&annotation;start_of_validity">
+    <rdfs:label>Start of validity</rdfs:label>
+  </owl:AnnotationProperty>
+  <owl:AnnotationProperty rdf:about="&annotation;end_of_validity">
+    <rdfs:label>End of validity</rdfs:label>
+  </owl:AnnotationProperty>
+  <owl:AnnotationProperty rdf:about="&annotation;famille">
+    <rdfs:label>It is at present unknown what the semantics of the contents of this field are</rdfs:label>
+  </owl:AnnotationProperty>
+  <owl:AnnotationProperty rdf:about="&annotation;language_list">
+    <rdfs:label>List of language(s) concerned by this link</rdfs:label>
+  </owl:AnnotationProperty>
+  <owl:AnnotationProperty rdf:about="&annotation;approximation">
+    <rdfs:label>Comment on additional information not precisely known</rdfs:label>
+    <rdfs:comment>comment that indicates for the human reader some additional information that may be available on a  date that is not precisely known (e.g. "this publication was printed in the 1960s")</rdfs:comment>
+  </owl:AnnotationProperty>
+  <owl:AnnotationProperty rdf:about="&annotation;type_of_reply">
+    <rdfs:label>Type of the reply to the question (makes only sense as the annotation of a date of reply)</rdfs:label>
+  </owl:AnnotationProperty>
+  <owl:AnnotationProperty rdf:about="&annotation;type_of_date">
+    <rdfs:label>Type of the date (e.g. for IF_TYPE)</rdfs:label>
+  </owl:AnnotationProperty>
+  <owl:AnnotationProperty rdf:about="&annotation;comment_on_date">
+    <rdfs:label>Comment on the date (e.g. for IF_COMMENT, LB_DN_COMMENT)</rdfs:label>
+  </owl:AnnotationProperty>
+  <owl:AnnotationProperty rdf:about="&annotation;in_committee">
+    <rdfs:label>An agent is part of a parliamentary committee</rdfs:label>
+  </owl:AnnotationProperty>
+  <owl:AnnotationProperty rdf:about="&annotation;transposition_deadline_transmitted">
+    <rdfs:label>Transposition deadline that the SecGen indicates for a NIM</rdfs:label>
+  </owl:AnnotationProperty>
+  <owl:AnnotationProperty rdf:about="&annotation;transposition_notification">
+    <rdfs:label>Notication date by the Member State</rdfs:label>
+  </owl:AnnotationProperty>
+  <owl:AnnotationProperty rdf:about="&annotation;result_decision">
+    <rdfs:label>Result of the decision of a judicial procedure, encoded as http://publications.europa.eu/mdr/resource/authority/procresult/html/procresult-eng.html</rdfs:label>
+  </owl:AnnotationProperty>
+  <owl:AnnotationProperty rdf:about="&annotation;eli_source">
+    <rdfs:label>ELI of the source work of this relationship. Can be either the ELI of a complete act or the ELI of a subdivision</rdfs:label>
+  </owl:AnnotationProperty>
+  <owl:AnnotationProperty rdf:about="&annotation;eli_target">
+    <rdfs:label>ELI of the target work of this relationship. Can be either the ELI of a complete act or the ELI of a subdivision</rdfs:label>
+  </owl:AnnotationProperty>
+
+  <!-- Subdivision.xls -->
+  <owl:AnnotationProperty rdf:about="&annotation;alinea">
+    <rdfs:label>article part of the structure of an act (e.g. for LB_DNPLUS)</rdfs:label>
+  </owl:AnnotationProperty>
+  <owl:AnnotationProperty rdf:about="&annotation;annex">
+    <rdfs:label>annex part of the structure of an act (e.g. for LB_DNPLUS)</rdfs:label>
+  </owl:AnnotationProperty>
+  <owl:AnnotationProperty rdf:about="&annotation;appendix">
+    <rdfs:label>appendix part of the structure of an act (subdivision CAT)</rdfs:label>
+  </owl:AnnotationProperty>
+  <owl:AnnotationProperty rdf:about="&annotation;article">
+    <rdfs:label>article part of the structure of an act (e.g. for LB_DNPLUS)</rdfs:label>
+  </owl:AnnotationProperty>
+  <owl:AnnotationProperty rdf:about="&annotation;citation">
+    <rdfs:label>citation part of the structure of an act (e.g. for LB_DNPLUS)</rdfs:label>
+  </owl:AnnotationProperty>
+  <owl:AnnotationProperty rdf:about="&annotation;chapter">
+    <rdfs:label>chapter part of the structure of an act (e.g. for LB_DNPLUS)</rdfs:label>
+  </owl:AnnotationProperty>
+  <owl:AnnotationProperty rdf:about="&annotation;hyphen">
+    <rdfs:label>hypen part of the structure of an act (subdivision CAT)</rdfs:label>
+  </owl:AnnotationProperty>
+  <owl:AnnotationProperty rdf:about="&annotation;indent">
+    <rdfs:label>indent part of the structure of an act (e.g. for LB_DNPLUS)</rdfs:label>
+  </owl:AnnotationProperty>
+  <owl:AnnotationProperty rdf:about="&annotation;paragraph">
+    <rdfs:label>paragraph part of the structure of an act (e.g. for LB_DNPLUS)</rdfs:label>
+  </owl:AnnotationProperty>
+  <owl:AnnotationProperty rdf:about="&annotation;part">
+    <rdfs:label>"part" part of the structure of an act (currently not in Procat)</rdfs:label>
+  </owl:AnnotationProperty>
+  <owl:AnnotationProperty rdf:about="&annotation;phrase">
+    <rdfs:label>phrase part of the structure of an act (currently not in Procat)</rdfs:label>
+  </owl:AnnotationProperty>
+  <owl:AnnotationProperty rdf:about="&annotation;point">
+    <rdfs:label>point part of the structure of an act (e.g. for LB_DNPLUS)</rdfs:label>
+  </owl:AnnotationProperty>
+  <owl:AnnotationProperty rdf:about="&annotation;preamble">
+    <rdfs:label>preamble part of the structure of an act (currently not in Procat)</rdfs:label>
+  </owl:AnnotationProperty>
+  <owl:AnnotationProperty rdf:about="&annotation;protocol">
+    <rdfs:label>protocol part of the structure of an act (e.g. for LB_DNPLUS)</rdfs:label>
+  </owl:AnnotationProperty>
+  <owl:AnnotationProperty rdf:about="&annotation;recital">
+    <rdfs:label>recital part of the structure of an act (currently not in Procat)</rdfs:label>
+  </owl:AnnotationProperty>
+  <owl:AnnotationProperty rdf:about="&annotation;rule">
+    <rdfs:label>rule part of the structure of an act (currently not in Procat)</rdfs:label>
+  </owl:AnnotationProperty>
+  <owl:AnnotationProperty rdf:about="&annotation;section">
+    <rdfs:label>section part of the structure of an act (currently not in Procat)</rdfs:label>
+  </owl:AnnotationProperty>
+  <owl:AnnotationProperty rdf:about="&annotation;title">
+    <rdfs:label>section part of the structure of an act (currently not in Procat)</rdfs:label>
+  </owl:AnnotationProperty>
+
+
+
+  <owl:AnnotationProperty rdf:about="&annotation;subparagraph">
+    <rdfs:label>subparagraph part of the structure of an act (e.g. for LB_DNPLUS)</rdfs:label>
+  </owl:AnnotationProperty>
+  <owl:AnnotationProperty rdf:about="&annotation;sentence">
+    <rdfs:label>sentence part of the structure of an act (e.g. for LB_DNPLUS)</rdfs:label>
+  </owl:AnnotationProperty>
+  
+  
+
+  <owl:AnnotationProperty rdf:about="&annotation;comment_on_legal_basis">
+    <rdfs:label>Comment on the legal basis (e.g. for LB_DN_COMMENTPLUS)</rdfs:label>
+  </owl:AnnotationProperty>
+  <owl:AnnotationProperty rdf:about="&annotation;requesting_dg">
+    <rdfs:label>DG has launched a request for caducity in the repertoire of the legislation in force</rdfs:label>
+  </owl:AnnotationProperty>
+  <owl:AnnotationProperty rdf:about="&annotation;fragment_cited_target">
+    <rdfs:label>Precise target for citations (Procat type CI)</rdfs:label>
+    <rdfs:comment>Precise target for citations especially of Procat type CI, e.g. 
+    <![CDATA[<owl:Axiom> 
+             <ont:fragment_cited_target>A03</ont:fragment_cited_target> 
+             <owl:annotatedSource rdf:resource="$BASE_URL$/resource/celex/21960A0611(01)"/> 
+             <owl:annotatedProperty rdf:resource="$BASE_URL$/ontology/cdm#work_cites_work"/> 
+             <owl:annotatedTarget rdf:resource="$BASE_URL$/resource/celex/21958A1108(01)"/> 
+             </owl:Axiom> ]]></rdfs:comment>
+  </owl:AnnotationProperty>
+  <owl:AnnotationProperty rdf:about="&annotation;fragment_citing_source">
+    <rdfs:label>Precise target for citations (Procat type CJ)</rdfs:label>
+    <rdfs:comment>Precise target for citations especially of Procat type CJ, e.g. 
+    <![CDATA[<owl:Axiom> 
+             <ont:fragment_cited_target>L2</ont:fragment__cited_target> 
+             <ont:fragment_citing_source>N 106 164 - 167 170 172 209</ont:fragment_citing_source> 
+             <owl:annotatedSource rdf:resource="$BASE_URL$/resource/celex/62006J0120"/> 
+             <owl:annotatedProperty rdf:resource="$BASE_URL$/ontology/cdm#work_cites_work"/> 
+             <owl:annotatedTarget rdf:resource="$BASE_URL$/resource/celex/11997E288"/> 
+             </owl:Axiom> ]]></rdfs:comment>
+  </owl:AnnotationProperty>
+  <owl:AnnotationProperty rdf:about="&annotation;publication_reference">
+    <rdfs:label>Precise publication reference</rdfs:label>
+    <rdfs:comment>Precise publication reference field (SO in procat). Is
+    in full text, needed in IDOL as a single field because IDOL is not
+    able to derive information from several fields
+    (cf. https://webgate.ec.europa.eu/publications/jira/browse/METACONV-7)</rdfs:comment>
+  </owl:AnnotationProperty>
+  <owl:AnnotationProperty rdf:about="&annotation;order">
+    <rdfs:label>Order of the annotation in a list</rdfs:label>
+    <rdfs:comment>Precise the place of the item in the rdflist which the annotation relates to)</rdfs:comment>
+  </owl:AnnotationProperty>
+  <!-- Error handling -->
+  <owl:AnnotationProperty rdf:about="&annotation;quality_issue">
+    <rdfs:label>Description of a quality issue with a given statement</rdfs:label>
+  </owl:AnnotationProperty>
+  <owl:AnnotationProperty rdf:about="&annotation;error_message">
+    <rdfs:label>Error message related to the quality issue</rdfs:label>
+  </owl:AnnotationProperty>
+  <owl:AnnotationProperty rdf:about="&annotation;mapping_issue">
+    <rdfs:label>Captures incomplete mapping knowledge</rdfs:label>
+  </owl:AnnotationProperty>
+  <owl:AnnotationProperty rdf:about="&annotation;old_value">
+    <rdfs:label>Original (wrong) value</rdfs:label>
+  </owl:AnnotationProperty>
+  <owl:AnnotationProperty rdf:about="&annotation;build_info">
+    <rdfs:label>Build information</rdfs:label>
+  </owl:AnnotationProperty>
+  <owl:AnnotationProperty rdf:about="&annotation;write-once">
+    <rdfs:label>Write a certain property at maximum once, afterwards block possible updates</rdfs:label>
+  </owl:AnnotationProperty>
+
+  <owl:AnnotationProperty rdf:about="&annotation;in_notice">
+    <rdfs:label>Write a certain property as present in branch, tree and object notices.</rdfs:label>
+  </owl:AnnotationProperty>
+  <owl:AnnotationProperty rdf:about="&annotation;display_order">
+    <rdfs:label>Display properties in a certain order.</rdfs:label>
+  </owl:AnnotationProperty>
+  
+  <owl:AnnotationProperty rdf:about="&annotation;manifestation_restriction_on_use_jurisdiction">
+    <rdfs:label>based on 540 $b</rdfs:label>
+  </owl:AnnotationProperty>
+  
+  <owl:AnnotationProperty rdf:about="&annotation;manifestation_restriction_on_use_jurisdiction_object">
+    <rdfs:label>based on 540 $3</rdfs:label>
+  </owl:AnnotationProperty>
+
+  <owl:AnnotationProperty rdf:about="&annotation;sequence_number">
+    <rdfs:label>An ordered set of elements</rdfs:label>
+  </owl:AnnotationProperty>
+
+  <owl:AnnotationProperty rdf:about="&annotation;year">
+    <rdfs:label>Year part of a reference (in case of decomposition)</rdfs:label>
+  </owl:AnnotationProperty>
+
+  <owl:AnnotationProperty rdf:about="&annotation;prefix">
+    <rdfs:label>Prefix part of a reference (in case of decomposition)</rdfs:label>
+  </owl:AnnotationProperty>
+
+  <owl:AnnotationProperty rdf:about="&annotation;suffix">
+    <rdfs:label>Suffix part of a reference (in case of decomposition)</rdfs:label>
+  </owl:AnnotationProperty>
+
+
+  <owl:AnnotationProperty rdf:about="&annotation;context_decision">
+    <rdfs:label>the context of a decision in case law, corresponds to caselawext:context_decision in IMMC</rdfs:label>
+  </owl:AnnotationProperty>
+
+  <owl:AnnotationProperty rdf:about="&annotation;context">
+    <rdfs:label>the context in which a statement holds true, e.g. for the implementation of certain directives into national law</rdfs:label>
+  </owl:AnnotationProperty>
+
+  <owl:AnnotationProperty rdf:about="&annotation;status">
+    <rdfs:label>status of an identifier manifestation, typically "valid" (if ever explicitly stated) or "invalid" (primarily for General Publications)</rdfs:label>
+  </owl:AnnotationProperty>
+
+  <owl:AnnotationProperty rdf:about="&annotation;changed_to_identifier">
+    <rdfs:label>A wrongly built identifier has been changed to another one that is given here</rdfs:label>
+  </owl:AnnotationProperty>
+
+
+  <owl:AnnotationProperty rdf:about="&annotation;ignore_identifier">
+    <rdfs:label>The given identifier should be ignored, e.g. because it is erroneous</rdfs:label>
+  </owl:AnnotationProperty>
+
+
+  <owl:AnnotationProperty rdf:about="&annotation;to_be_indexed">
+    <rdfs:label>A property with this annotation in the ontology must be included in index notices</rdfs:label>
+  </owl:AnnotationProperty>
+
+
+ <owl:AnnotationProperty rdf:about="&annotation;do_not_index">
+    <rdfs:label>For any digital object carrying this annotation no index notice must be created</rdfs:label>
+  </owl:AnnotationProperty>
+
+  <owl:AnnotationProperty rdf:about="&annotation;read_only">
+    <rdfs:label>For any digital object carrying this annotation the update should be rejected</rdfs:label>
+  </owl:AnnotationProperty>
+  
+  <!-- Example for the annotation of data and object properties (with suitable entities defined):
+
+<owl:NamedIndividual rdf:about="&owl2;ontology:31999R123">
+<rdf:type rdf:resource="&owl2;case_law"/>
+</owl:NamedIndividual>
+
+
+<owl:NamedIndividual rdf:about="&owl2;ontology:32000R123">
+<rdf:type rdf:resource="&owl2;case_law"/>
+<owl2:work_title>Hallo</owl2:work_title>
+<owl2:work_contains_work rdf:resource="&owl2;ontology:31999R123"/>
+</owl:NamedIndividual>
+<owl:Axiom>
+<dc:description>description of data property</dc:description>
+<rdfs:comment>comment on title (in Prot&#233;g&#233;)</rdfs:comment>
+<owl:annotatedTarget>Hallo</owl:annotatedTarget>
+<owl:annotatedSource rdf:resource="&owl2;ontology:32000R123"/>
+<owl:annotatedProperty rdf:resource="&owl2;work_title"/>
+</owl:Axiom>
+<owl:Axiom>
+<rdfs:comment>Comment on title</rdfs:comment>
+<owl:annotatedTarget rdf:resource="&owl2;ontology:31999R123"/>
+<owl:annotatedSource rdf:resource="&owl2;ontology:32000R123"/>
+<owl:annotatedProperty rdf:resource="&owl2;work_contains_work"/>
+</owl:Axiom> 
+  -->
+  <!-- Properties for sequencing, cf. https://webgate.ec.europa.eu/publications/jira/browse/METACONV-343 -->
+  <owl:ObjectProperty rdf:about="&cdm;memberList">
+    <rdfs:comment>Object property indicating on which providing th rdf:List that organizes a set of property values</rdfs:comment>
+    <rdfs:label>Sequence of values</rdfs:label>
+    <rdfs:range rdf:resource="&rdf;List"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="&cdm;listedProperty">
+    <rdfs:comment>Object property identifying the property from which object values are listed</rdfs:comment>
+    <rdfs:label>Property with list as range</rdfs:label>
+    <rdfs:domain rdf:resource="&rdf;List"/>
+    <rdfs:range rdf:resource="&rdf;Property"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="&cdm;nestedList">
+    <rdfs:comment>Object property that is a sub-property of
+    rdf:first. It introduces a nested list (as the first resource) at
+    the current position in the rdf:List</rdfs:comment>
+    <rdfs:label>Property to hold nested lists</rdfs:label>
+    <rdfs:subPropertyOf rdf:resource="&rdf;first"/>
+    <rdfs:range rdf:resource="&rdf;List"/>
+  </owl:ObjectProperty>
+</rdf:RDF>
